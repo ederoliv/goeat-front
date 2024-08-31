@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Animated Login Form</title>
+	<title>Goeat - Cadastrar-se</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
@@ -16,13 +16,22 @@
 			<form action="index.html">
 				<img class="logo" src="../../assets/goeat-logo.svg">
 
+						<input type="text" class="input" placeholder="Nome">
+
+						<input type="text" class="input" placeholder="CPF">
+
+						<input type="tel" class="input" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="Telefone: (xx) xxxxx-xxxx">
+
+						<input type="date" class="input" placeholder="Data de nascimento">
+
            		   		<input type="text" class="input" placeholder="E-mail">
 
-           		    	<input type="password" class="input" placeholder="Senha">
+           		    	<input type="password" class="input" placeholder="Insira sua senha">
+
+						<input type="password" class="input" placeholder="Insira sua senha novamente">
         
-            	<a  id="forgot" href="../forgotPassword/index.html">Esqueceu a senha ?</a>
-            	<input type="submit" class="btn" value="Acessar">
-				<a href="../registerClient/index.html">ou então Cadastre-se</a>
+            	<input type="submit" class="btn" value="Cadastrar-se">
+				<a href="../loginClient/index.html">ou Entre com sua conta</a>
             </form>
         </div>
     </div>
