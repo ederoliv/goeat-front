@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="icon/png" href="1.png" >
+    <title>Meus produtos - Goeat</title>
+</head>
+<body style="background-color: white;">
+    <nav>
+        <a class="navbar-brand" id="tit">Meus produtos</a>
+      </nav>
+
+      <div class="container mt-5 mem " >
+        <input type="text" placeholder="title" id="title">
+        <div id="p">
+            <input type="number" onkeyup="gettotal()" placeholder="Preço" id="price">
+
+            <input type="number" onkeyup="gettotal()" placeholder="Descontot" id="discount">
+            <small id="total"></small>
+        </div>
+        <input type="number" placeholder="amount" id="count">
+        <input type="text" placeholder="category" id="category">
+        <div id="btn">
+            <button type="button" class="btn btn-outline-success" id="create">Cadastrar novo produto</button>
+             <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" onkeyup="searchbox(this.value)" placeholder="Search" aria-label="Search" id="search">
+          <button class="btn btn-outline-secondary " type="button" onclick="searchclick(this.id)" style="width: 50%; " id="searchbytitle">Pesquisar por nome</button>
+          <button class="btn btn-outline-secondary " type="button" onclick="searchclick(this.id)" style="width: 50%;" id="searchbycategory">Pesquisar por categoria</button>
+        </form>
+            <button type="button" class="btn btn-outline-danger mt-3" id="delete">Excluir todos os produtos</button>
+        </div>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>title</th>
+                <th>price</th>
+                <th>taxes</th>
+                <th>ads</th>
+                <th>discount</th>
+                <th>total</th>
+                <th>count</th>
+                <th>category</th>
+                <th>update</th>
+                <th>delete</th>
+            </tr>
+            <tbody id="tbody">
+              
+            </tbody>
+        </table>
+        </div>
+        <footer class="bg-dark text-center text-white mt-5">
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+              <a class="text-white">Goeat</a>
+            </div>
+          </footer>
+        <script src="js/popper.min.js"></script>
+        <script src="js/jquery-3.6.1.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/main.js"></script>
+</body>
+</html>
