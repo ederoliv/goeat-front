@@ -10,6 +10,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="acompanhamento.css" />
     <title>Acompanhar - Goeat</title>
   </head>
   <body id="body">
@@ -29,64 +30,70 @@
       </nav>
 
       <main>
-        <div class="main__container">
-          <!-- MAIN TITLE STARTS HERE -->
-
-          <div class="main__title">
-            <img src="assets/hello.svg" alt="" />
-            <div class="main__greeting">
-              <h1>Olá, Br Foods Restaurante</h1>
-              <p>Bem-vindo ao seu painel de administração</p>
+        <div class="kanban-container">
+          <div class="kanban-column" id="em-espera-column">
+            <div class="kanban-category" id="em-espera-category">Em Espera</div>
+            <div class="kanban-item" id="tarefa1" draggable="true">
+              <div class="kanban-item-title">
+                <span>#101</span> João Silva
+              </div>
+              <ul>
+                <li>Pizza de Calabresa</li>
+                <li>Refrigerante 2L</li>
+              </ul>
+            </div>
+            <div class="kanban-item" id="tarefa2" draggable="true">
+              <div class="kanban-item-title">
+                <span>#102</span> Maria Oliveira
+              </div>
+              <ul>
+                <li>Hambúrguer</li>
+                <li>Batata Frita</li>
+                <li>Suco de Laranja</li>
+              </ul>
             </div>
           </div>
-
-          <!-- MAIN TITLE ENDS HERE -->
-          <!-- CHARTS STARTS HERE -->
-          <div class="charts">
-            <div class="charts__left">
-              <div class="charts__left__title">
-                <div>
-                  <h1>Estatística diária</h1>
-                  <p>Caxias do Sul, Rio Grande do Sul, BR</p>
-                </div>
-                <i class="fa fa-usd" aria-hidden="true"></i>
+      
+          <div class="kanban-column" id="preparando-column">
+            <div class="kanban-category" id="preparando-category">Preparando</div>
+            <div class="kanban-item" id="tarefa3" draggable="true">
+              <div class="kanban-item-title">
+                <span>#103</span> Pedro Santos
               </div>
-              <div id="apex1"></div>
-            </div>
-
-            <div class="charts__right">
-              <div class="charts__right__title">
-                <div>
-                  <h1>Acompanhamento</h1>
-                </div>
-                <i class="fa fa-usd" aria-hidden="true"></i>
-              </div>
-
-              <div class="charts__right__cards">
-                <div class="card1">
-                  <h1>Preparando</h1>
-                  <p>3</p>
-                </div>
-
-                <div class="card2">
-                  <h1>Finalizados</h1>
-                  <p>10</p>
-                </div>
-
-                <div class="card3">
-                  <h1>A caminho</h1>
-                  <p>2</p>
-                </div>
-
-                <div class="card4">
-                  <h1>Em espera</h1>
-                  <p>3</p>
-                </div>
-              </div>
+              <ul>
+                <li>Sushi</li>
+                <li>Temaki</li>
+              </ul>
             </div>
           </div>
-          <!-- CHARTS ENDS HERE -->
+      
+          <div class="kanban-column" id="a-caminho-column">
+            <div class="kanban-category" id="a-caminho-category">A Caminho</div>
+            <div class="kanban-item" id="tarefa4" draggable="true">
+              <div class="kanban-item-title">
+                <span>#104</span> Ana Paula
+              </div>
+              <ul>
+                <li>Lasanha</li>
+                <li>Refrigerante 600ml</li>
+              </ul>
+            </div>
+          </div>
+      
+          <div class="kanban-column" id="finalizado-column">
+            <div class="kanban-category" id="finalizado-category">Finalizado</div>
+            <div class="kanban-item" id="tarefa5" draggable="true">
+              <div class="kanban-item-title">
+                <span>#105</span> Carlos Souza
+              </div>
+              <ul>
+                <li>Pastel de Carne</li>
+                <li>Coca-Cola 350ml</li>
+              </ul>
+            </div>
+          </div>
         </div>
+      
       </main>
 
       <div id="sidebar">
@@ -142,5 +149,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="script.js"></script>
+    <script src="acompanhamento.js"></script>
   </body>
 </html>
