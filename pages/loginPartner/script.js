@@ -19,8 +19,11 @@ function login() {
   xhr.onload = function() {//em caso de sucesso
     if (xhr.status === 200) {
 
+    const partnerData = JSON.parse(xhr.responseText);
+    sessionStorage.setItem('userData', JSON.stringify(partnerData));
 
-      window.location.replace('../partner/acompanhar/index.html');
+    window.location.replace('../partner/acompanhar/index.html');
+    
     } else {
       console.log('Login failed!');
       // Handle error scenario
