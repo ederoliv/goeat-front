@@ -416,6 +416,9 @@ main {
   left: 0 !important;
   position: absolute;
 }
+.link-text {
+  color: #ffffff !important;
+}
 
 @media only screen and (max-width: 978px) {
   .container {
