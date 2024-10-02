@@ -31,14 +31,26 @@
       </nav>
 
       <main>
+
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+
+              <div class="modal-inputs">
+              <input class="input-modal" type="text" placeholder="Digite o código do produto...">
+              <input id="deleteButton" class="input-modal" type="button" value="Excluir">
+              </div>
+          </div>
+      </div>
       
         <div class="product-container">
           <div class="search-container">
 
 
             <input type="text" class="input" id="searchInput" placeholder="Pesquisar produtos">
-            <input type="button" class="input" id="searchButton"  value="Pesquisar" onclick="searchProduct()">
-            <input type="button" class="input" id="productButton" value="Adicionar Produto" onclick="adicionarProdutoPage()">
+            <input type="button" class="input" id="searchButton"  value="Pesquisar">
+            <input type="button" class="input" id="productButton" value="Adicionar produto" onclick="adicionarProdutoPage()">
+            <input type="button" class="input" id="deleteButton"  value="Excluir produto" onclick="abrirModal()">
           </div>
 
           <table>  
@@ -137,7 +149,7 @@
         </div>
       </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="script.js"></script>
   </body>

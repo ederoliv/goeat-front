@@ -5,6 +5,8 @@ if (userDataString) {
     console.log(userData.name); // Acessando o nome
     console.log(userData.id); // Acessando o ID
     document.getElementById('userName').textContent = userData.name;
+
+    
 }
 };
 
@@ -30,4 +32,14 @@ function closeSidebar() {
 
 function adicionarProdutoPage() {
   window.location.replace('adicionar.html');
+}
+
+function abrirModal() {
+  document.getElementById("modal").style.display = "block";
+}
+
+// Função para fechar o modal quando o usuário clica no X
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+  document.getElementById("modal").style.display = "none";
 }
