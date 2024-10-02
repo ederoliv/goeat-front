@@ -1,23 +1,28 @@
 
 function register() {
 
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    
+
+    if(password.value === confirmPassword.value){
 
     const name = document.getElementById('name');
     const cnpj = document.getElementById('cnpj');
     const number = document.getElementById('number');
     const email = document.getElementById('email');
-    const password = document.getElementById('password');
-    const confirmPassword = document.getElementById('confirmPassword');
-  
-  
+    
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8080/partners/register', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
   
     const registry = {
-
-      email: email,
-      password: password
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      cnpj: cnpj.value,
+      phone: number.value
     };
   
     xhr.send(JSON.stringify(registry));
@@ -29,10 +34,16 @@ function register() {
       sessionStorage.setItem('userData', JSON.stringify(partnerData));
   
       window.location.replace('../loginPartner/index.html');
-      
       } else {
         alert('Login failed!');
-        // Handle error scenario
+        // caso  de falha
+
       }
     };
+
+  }else{
+
+        alert('Passwords do not match');
+
   }
+}
