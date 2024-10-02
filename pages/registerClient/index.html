@@ -16,21 +16,21 @@
 			<form action="index.html">
 				<img class="logo" src="../../assets/goeat-logo.svg">
 
-						<input type="text" class="input" placeholder="Nome">
+						<input id="name" type="text" class="input" placeholder="Nome">
 
-						<input type="text" class="input" placeholder="CPF">
+						<input id="cpf" type="text" class="input" placeholder="CPF">
 
-						<input type="tel" class="input" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required placeholder="Telefone: (xx) xxxxx-xxxx">
+						<input id="number" type="tel" class="input" name="phone" placeholder="Telefone: (xx) xxxxx-xxxx">
 
-						<input type="date" class="input" placeholder="Data de nascimento">
+						<input id="birth" type="date" class="input" placeholder="Data de nascimento">
 
-           		   		<input type="text" class="input" placeholder="E-mail">
+           		   		<input id="email" type="text" class="input" placeholder="E-mail">
 
-           		    	<input type="password" class="input" placeholder="Insira sua senha">
+           		    	<input id="password" type="password" class="input" placeholder="Insira sua senha">
 
-						<input type="password" class="input" placeholder="Insira sua senha novamente">
+						<input id="confirmPassword"type="password" class="input" placeholder="Insira sua senha novamente">
         
-            	<input type="submit" class="btn" value="Cadastrar-se">
+            	<input type="button" class="btn" value="Cadastrar-se" onclick="register()">
 				<a href="../loginClient/index.html">ou Entre com sua conta</a>
             </form>
         </div>
