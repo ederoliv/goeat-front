@@ -27,3 +27,7 @@ function closeSidebar() {
     sidebarOpen = false;
   }
 }
+
+function adicionarProdutoPage() {
+  window.location.replace('adicionar.html');
+}
