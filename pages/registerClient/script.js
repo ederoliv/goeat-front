@@ -15,7 +15,7 @@ function register() {
     const email = document.getElementById('email');
     
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8080/clients/register', true);
+    xhr.open('POST', 'http://localhost:8080/api/v1/clients/register', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
   
     const registry = {
