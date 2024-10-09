@@ -1,5 +1,6 @@
 const userDataString = sessionStorage.getItem('userData');
 const userData = JSON.parse(userDataString);
+var defaultProductsUrl = 'http://localhost:8080/api/v1/products/';
 var urlWithUserId = `http://localhost:8080/api/v1/products/${userData.partnerId}`;
 
 
