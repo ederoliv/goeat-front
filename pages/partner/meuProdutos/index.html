@@ -31,14 +31,13 @@
       </nav>
 
       <main>
-
         <div id="modal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
 
               <div class="modal-inputs">
-              <input class="input-modal" type="text" placeholder="Digite o código do produto...">
-              <input id="deleteButton" class="input-modal" type="button" value="Excluir">
+              <input class="input-modal" id="codeInput" type="text" placeholder="Digite o código do produto...">
+              <input id="deleteButton" class="input-modal" type="button" value="Excluir" onclick="deleteProducts()">
               </div>
           </div>
       </div>
@@ -63,37 +62,9 @@
                     <th>Editar/Deletar</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-          </tr> 
-                </tbody>
+            <tbody id="tbody"></tbody>
           </table>
+
         </div>
 
       </main>

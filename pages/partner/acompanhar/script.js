@@ -2,9 +2,7 @@ window.onload = function() {
   const userDataString = sessionStorage.getItem('userData');
 if (userDataString) {
     const userData = JSON.parse(userDataString);
-    console.log(userData.name); // Acessando o nome
-    console.log(userData.id); // Acessando o ID
-    document.getElementById('userName').textContent = userData.name;
+    document.getElementById('userName').textContent = userData.name + " " + userData.partnerId;
 }
 };
 
