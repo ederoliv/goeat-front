@@ -30,7 +30,7 @@ async function registerProduct(){
       description: description.value,
       price: price.value,
       imageUrl: 'link ds imagem',
-      menuId: '2f9d8c10-345e-46f7-9067-3e7020a8a234'
+      menuId: userData.partnerId
     }
 
     const response = await fetch(defaultProductsUrl, {
@@ -47,5 +47,3 @@ async function registerProduct(){
         }
       });
   }
-
-  registerProduct();

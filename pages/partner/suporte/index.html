@@ -9,8 +9,8 @@
       integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="adicionar.css"/>
-    <link rel="stylesheet" href="styles.css"/>
+    
+    <link rel="stylesheet" href="styles.css" />
     <title>Acompanhar - Goeat</title>
   </head>
   <body id="body">
@@ -31,21 +31,36 @@
       </nav>
 
       <main>
-      
-        <div class="form">
-          <label for="nome">Nome do Produto:</label>
-          <input type="text" id="nome" name="nome">
-  
-          <label for="descricao">Descrição:</label>
-          <textarea id="descricao" name="descricao"></textarea>
-  
-          <label for="preco">Preço:</label>
-          <input type="number" id="preco" name="preco">
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
 
-          <label for="imagem">Imagem do Produto:</label>
-          <input type="file" id="imagem" name="imagem">
-  
-          <button type="button" onclick="registerProduct()">Adicionar Produto</button>
+              <div class="modal-inputs">
+              <input class="input-modal" id="codeInput" type="text" placeholder="Digite o código do produto...">
+              <input id="deleteButton" class="input-modal" type="button" value="Excluir" onclick="deleteProducts()">
+              </div>
+          </div>
+      </div>
+      
+        <div class="product-container">
+          <div class="search-container">
+
+
+            <h1>Total de chamados: 999</h1>
+            <input type="button" class="input" id="productButton" value="Abrir novo chamado" onclick="adicionarProdutoPage()">
+          </div>
+
+          <table>  
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+
         </div>
 
       </main>
@@ -86,7 +101,7 @@
             <i class="fa fa-files-o"></i>
             <a class="link-text" href="#">Relatórios</a>
           </div>
-          <div class="sidebar__link">
+          <div class="sidebar__link active_menu_linke">
             <i class="fa fa-comments"></i>
             <a class="link-text" href="../suporte/index.html">Suporte</a>
           </div>
@@ -94,7 +109,7 @@
             <i class="fa fa-wrench"></i>
             <a class="link-text" href="#">Configurações</a>
           </div>
-          <div class="sidebar__link active_menu_linke">
+          <div class="sidebar__link">
             <i class="fa fa-archive"></i>
             <a class="link-text" href="../meuProdutos/index.html">Meus produtos</a>
           </div>
@@ -105,9 +120,8 @@
         </div>
       </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="adicionar.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
