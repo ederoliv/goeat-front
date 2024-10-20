@@ -6,7 +6,7 @@ function login() {
     const password = passwordInput.value;
   
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://localhost:8080/clients/login', true);
+    xhr.open('POST', 'http://localhost:8080/api/v1/clients/login', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
   
     const credentials = {
@@ -25,8 +25,20 @@ function login() {
       window.location.replace('../client/index.html');
       
       } else {
-        alert('Login failed!');
-        // Handle error scenario
+        alertaErroLogin(); 
       }
     };
   }
+
+  //modal
+function alertaErroLogin() {
+  document.getElementById("modal").style.display = "block";
+}
+
+var span = document.getElementsByClassName("close")[0];
+span.onclick = fechar();
+
+function fechar() {
+
+  document.getElementById("modal").style.display = "none";
+}

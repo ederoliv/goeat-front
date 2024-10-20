@@ -25,8 +25,21 @@ function login() {
     window.location.replace('../partner/acompanhar/index.html');
     
     } else {
-      console.log('Login failed!');
-      // Handle error scenario
+      alertaErroLogin();
     }
   };
+}
+
+
+//modal
+function alertaErroLogin() {
+  document.getElementById("modal").style.display = "block";
+}
+
+var span = document.getElementsByClassName("close")[0];
+span.onclick = fechar();
+
+function fechar() {
+
+  document.getElementById("modal").style.display = "none";
 }

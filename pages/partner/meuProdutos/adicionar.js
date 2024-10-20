@@ -43,7 +43,20 @@ async function registerProduct(){
       .then(response => {
 
         if (response.ok) {
-          console.log(response);
+          alertaSucesso();
         }
       });
   }
+
+//modal
+function alertaSucesso() {
+  document.getElementById("modal").style.display = "block";
+}
+
+var span = document.getElementsByClassName("close")[0];
+span.onclick = fechar();
+
+function fechar() {
+
+  document.getElementById("modal").style.display = "none";
+}
