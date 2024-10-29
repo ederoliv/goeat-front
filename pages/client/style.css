@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+
+.w3-bar-block .w3-bar-item {padding:20px}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+#goeat-logo {
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px black;
+}
+
+#partner-logo {
+  width: 100px;
+}
