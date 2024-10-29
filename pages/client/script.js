@@ -33,12 +33,19 @@ function criarCardParceiro(parceiro) {
 
         const card = document.createElement('div');
         card.className = 'card';
+        const image = document.createElement('img');
+        image.className = 'partner-logo';
+        const name = document.createElement('h4');
+        name.className = 'partner-name';
 
-        const  image = document.createElement('img');
-        image.src = ''
 
+        name.innerText = post.name;
+        image.src = '../../assets/partner.png';
 
+        card.appendChild(image);
+        card.appendChild(name);
 
+        container.appendChild(card);
 
         console.log(post.name);
 
