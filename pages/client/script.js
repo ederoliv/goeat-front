@@ -21,7 +21,7 @@ function criarCardParceiro(parceiro) {
   }
   
   // Função para buscar os parceiros e criar os cards
-  async function lisPartners() {
+  async function listPartners() {
 
     const container = document.querySelector('#container');
 
@@ -39,6 +39,13 @@ function criarCardParceiro(parceiro) {
         name.className = 'partner-name';
 
 
+        card.dataset.partnerId = post.id;
+
+        card.addEventListener('click', () => {
+          const partnerId = card.dataset.partnerId;
+          window.location.href = `partner/index.html?partnerId=${partnerId}`;
+        });
+
         name.innerText = post.name;
         image.src = '../../assets/partner.png';
 
@@ -51,10 +58,12 @@ function criarCardParceiro(parceiro) {
 
     });
   }
+    
+
   
   // Chamar a função ao carregar a página
   window.onload = function() {
-    lisPartners();
+    listPartners();
   }
 
   function w3_open() {
