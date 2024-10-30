@@ -1,10 +1,10 @@
 // pega o ID da URL
-function obterIdRestaurante() {
+function getPartnerId() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('restauranteId');
+    return params.get('partnerId');
 }
 
-const restauranteId = obterIdRestaurante();
+const partnerId = getPartnerId();
 
 // request pra pegar os dados do restaurante
 fetch(`/api/restaurantes/${partnerId}`)
