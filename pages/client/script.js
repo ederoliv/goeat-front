@@ -54,8 +54,6 @@ function criarCardParceiro(parceiro) {
 
         container.appendChild(card);
 
-        console.log(post.name);
-
     });
   }
     
@@ -63,7 +61,9 @@ function criarCardParceiro(parceiro) {
   
   // Chamar a função ao carregar a página
   window.onload = function() {
+
     listPartners();
+    
   }
 
   function w3_open() {
