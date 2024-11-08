@@ -3,6 +3,7 @@ window.onload = function () {
 
     loadPartnerData(partnerId);
 
+    listPartnerProducts(partnerId);
     
 }
 
@@ -82,6 +83,19 @@ async function listPartnerProducts(partnerId) {
         addToCartButtonIcon.className = 'fa fa-cart-plus';
 
         
+        image.src = '../../../assets/foods.png';
+        
+        productName.innerText = post.name;
+
+        productDescription.innerText = post.description;
+
+        plusButton.innerText = '+';
+        quantityField.value = 0;
+        minusButton.innerText = '-';
+
+
+
+        
         /*
         card.dataset.partnerId = post.id;
 
@@ -97,14 +111,13 @@ async function listPartnerProducts(partnerId) {
         divQuantity.append(plusButton, quantityField, minusButton);
 
         divProductDetails.append(productName, productDescription);
-        
+
+        addToCartButton.appendChild(addToCartButtonIcon);
+
         card.append(image, divProductDetails, divQuantity, addToCartButton);
 
         container.appendChild(card);
-
-        
-        name.innerText = post.name;
-        image.src = '../../assets/partner.png';
+       
 
     });
 

@@ -40,6 +40,7 @@ function criarCardParceiro(parceiro) {
 
 
         card.dataset.partnerId = post.id;
+        
 
         card.addEventListener('click', () => {
           const partnerId = card.dataset.partnerId;

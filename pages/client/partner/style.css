@@ -26,25 +26,57 @@ body {
 }
 
 #container-products {
-    background-color: rgb(183, 218, 248);
+    width: 75%;
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
+    
 
     gap: 20px;
     
 }
 
 .card {
+  margin: 5px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   gap: 15px;
-}
 
+  justify-content: space-between;
+
+  border-radius: 10px;
+
+  background-color: rgb(183, 218, 248);
+}
+.product-image {
+  width: 150px;
+
+  position: relative;
+  
+  border-radius: 100px;
+}
 .product-name {
   font-size: 20px;
 }
 
 .product-description {
   font-size: 14px;
+}
+
+.quantity-button {
+width: 20px;
+}
+
+.quantity-field {
+  width: 20px;
+}
+
+.add-to-cart-button {
+  width: 150px;
+
+  margin-right: 0;
+
+
 }
