@@ -38,87 +38,103 @@ async function listPartnerProducts(partnerId) {
 
     const container = document.querySelector('#container-products');
 
-    const response = await fetch(`http://localhost:8080/api/v1/partners/${partnerId}/products`);
+    try {
 
-    const data = await response.json();
+        const response = await fetch(`http://localhost:8080/api/v1/partners/${partnerId}/products`);
 
-    data.map((post) => {
+        const data = await response.json();
 
-        const card = document.createElement('div');
-        card.className = 'card';
+        data.map((post) => {
 
+            const card = document.createElement('div');
+            card.className = 'card';
 
-        const image = document.createElement('img');
-        image.className = 'product-image';
-
-
-        const divProductDetails = document.createElement('div');
-        divProductDetails.className = 'product-details';
-
-        const productName = document.createElement('h2');
-        productName.className = 'product-name';
-
-        const productDescription = document.createElement('p');
-        productDescription.className = 'product-description';
+            const cardDetails = document.createElement('div');
+            cardDetails.className = 'card-details';
 
 
-        const divQuantity = document.createElement('div');
-        divQuantity.className = 'div-quantity';
-
-        const plusButton = document.createElement('button');
-        plusButton.className = 'quantity-button';
-
-        const quantityField = document.createElement('input');
-        quantityField.type = 'text';
-        quantityField.className = 'quantity-field';
-
-        const minusButton = document.createElement('button');
-        minusButton.className = 'quantity-button';
+            const image = document.createElement('img');
+            image.className = 'product-image';
 
 
-        const addToCartButton = document.createElement('button');
-        addToCartButton.className = 'add-to-cart-button';
+            const divProductDetails = document.createElement('div');
+            divProductDetails.className = 'product-details';
 
-        const addToCartButtonIcon = document.createElement('i');
-        addToCartButtonIcon.className = 'fa fa-cart-plus';
+            const productName = document.createElement('h2');
+            productName.className = 'product-name';
 
+            const productDescription = document.createElement('p');
+            productDescription.className = 'product-description';
+
+            const productPrice = document.createElement('p');
+            productPrice.className = 'product-price';
+
+
+            const divQuantity = document.createElement('div');
+            divQuantity.className = 'div-quantity';
+
+            const plusButton = document.createElement('button');
+            plusButton.className = 'quantity-button';
+
+            const quantityField = document.createElement('input');
+            quantityField.type = 'text';
+            quantityField.className = 'quantity-field';
+
+            const minusButton = document.createElement('button');
+            minusButton.className = 'quantity-button';
+
+
+            const addToCartButton = document.createElement('button');
+            addToCartButton.className = 'add-to-cart-button';
+
+            const addToCartButtonIcon = document.createElement('i');
+            addToCartButtonIcon.className = 'fa fa-cart-plus fa-3x add-to-cart-button-icon';
+
+
+            /*Definindo valores aos elementos da página*/
+            card.dataset.partnerId = post.id;
         
-        image.src = '../../../assets/foods.png';
-        
-        productName.innerText = post.name;
-
-        productDescription.innerText = post.description;
-
-        plusButton.innerText = '+';
-        quantityField.value = 0;
-        minusButton.innerText = '-';
+            image.src = '../../../assets/foods.png';
+            productName.innerText = post.name;
+            productDescription.innerText = post.description;
+            productPrice.innerText = `R$ ${formatPrice(post.price)}`;
 
 
 
-        
-        /*
-        card.dataset.partnerId = post.id;
 
-        
-        card.addEventListener('click', () => {
-          const partnerId = card.dataset.partnerId;
-          window.location.href = `partner/index.html?partnerId=${partnerId}`;
-        });
-        */
+            minusButton.innerText = '-';
+            quantityField.value = 0;
+            plusButton.innerText = '+';
+
+
 
         addToCartButton.appendChild(addToCartButtonIcon);
 
-        divQuantity.append(plusButton, quantityField, minusButton);
+        divQuantity.append(minusButton, quantityField, plusButton);
 
-        divProductDetails.append(productName, productDescription);
+        divProductDetails.append(productName, productDescription, productPrice);
 
         addToCartButton.appendChild(addToCartButtonIcon);
 
-        card.append(image, divProductDetails, divQuantity, addToCartButton);
+        cardDetails.append(image, divProductDetails, divQuantity);
+
+        card.append(cardDetails, addToCartButton);
 
         container.appendChild(card);
+
+
+        //Eventos
+        //card.addEventListener('click', () => {
+           // const partnerId = card.dataset.partnerId;
+           // window.location.href = `partner/index.html?partnerId=${partnerId}`;
+         // });
+
        
 
     });
+
+    } catch {
+        container.innerHTML = '<p class="error-message">Erro ao carregar produtos. Tente novamente mais tarde.</p>';
+    }
 
 }
