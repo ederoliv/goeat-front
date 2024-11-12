@@ -1,3 +1,6 @@
+var cart = [];
+
+
 window.onload = function () {
     const partnerId = getPartnerId();
 
@@ -13,6 +16,28 @@ function getPartnerId() {
     return params.get('partnerId');
 }
 
+
+
+// FUNÇÕES DO CARRINHO
+function addCartItem(productName, productQuantity) {
+
+    cart.push({ name: productName, quantity: productQuantity});
+
+    alert(`${cart[cart.length-1].quantity} Unidades de ${cart[cart.length-1].name}`);
+    //add
+}
+
+function removeCartItem(){
+    //remove
+}
+
+function updateCart(){
+    //update
+}
+
+
+
+//REQUISIÇÕES PARA API
 async function loadPartnerData(partnerId) {
 
     try {
@@ -91,7 +116,7 @@ async function listPartnerProducts(partnerId) {
             addToCartButtonIcon.className = 'fa fa-cart-plus fa-3x add-to-cart-button-icon';
 
 
-            /*Definindo valores aos elementos da página*/
+            
             card.dataset.partnerId = post.id;
         
             image.src = '../../../assets/foods.png';
@@ -101,13 +126,11 @@ async function listPartnerProducts(partnerId) {
 
 
 
-
             minusButton.innerText = '-';
             quantityField.value = 0;
             plusButton.innerText = '+';
 
-
-
+                        
         addToCartButton.appendChild(addToCartButtonIcon);
 
         divQuantity.append(minusButton, quantityField, plusButton);
@@ -124,12 +147,23 @@ async function listPartnerProducts(partnerId) {
 
 
         //Eventos
-        //card.addEventListener('click', () => {
-           // const partnerId = card.dataset.partnerId;
-           // window.location.href = `partner/index.html?partnerId=${partnerId}`;
-         // });
 
-       
+        plusButton.addEventListener('click', () => {
+            quantityField.value = parseInt(quantityField.value) + 1;
+        });
+    
+                
+        minusButton.addEventListener('click', () => {
+            quantityField.value = Math.max(0, parseInt(quantityField.value) - 1);
+        });
+
+        addToCartButton.addEventListener('click', () => {
+
+            addCartItem(productName.textContent, parseInt(quantityField.value));
+            
+        });
+
+
 
     });
 
@@ -138,3 +172,5 @@ async function listPartnerProducts(partnerId) {
     }
 
 }
+
+
