@@ -21,6 +21,10 @@ function getPartnerId() {
 // FUNÇÕES DO CARRINHO
 function addCartItem(productName, productQuantity) {
 
+    if(!cart){
+        alert(!cart);
+    }
+
     cart.push({ name: productName, quantity: productQuantity});
 
     alert(`${cart[cart.length-1].quantity} Unidades de ${cart[cart.length-1].name}`);
@@ -33,6 +37,25 @@ function removeCartItem(){
 
 function updateCart(){
     //update
+}
+
+function createCartNavbar() {
+    const cartNavbar = document.createElement('div');
+    cartNavbar.id = 'cart-navbar';
+
+  
+    const cartCount = document.createElement('span');
+    cartCount.textContent = `Carrinho: ${cart.length} itens`;
+  
+    const viewCartButton = document.createElement('button');
+    viewCartButton.textContent = 'Ver Carrinho';
+    // Add event listener to view cart button (redirect to cart page, etc.)
+  
+    cartNavbar.appendChild(cartCount);
+    cartNavbar.appendChild(viewCartButton);
+  
+    document.container.appendChild(cartNavbar);
+
 }
 
 
