@@ -19,11 +19,11 @@ function getPartnerId() {
 
 
 // FUNÇÕES DO CARRINHO
-function addCartItem(productName, productQuantity) {
+function addCartItem(productName, productPrice, productQuantity) {
 
     if(cart.length === 0) createCartNavbar();
 
-    cart.push({ name: productName, quantity: productQuantity});
+    cart.push({ name: productName, price: productPrice, quantity: productQuantity});
 
     updateCartNavbar();
 
@@ -40,7 +40,17 @@ function updateCart(){
 
 function updateCartNavbar() {
     const cartInfo = document.getElementById('cart-info');
-    cartInfo.textContent = `Carrinho: ${cart.length} itens | Total: R$ ${totalCartValue()}`;
+
+    //calcula o total de itens do cart
+    let totalItems = 0;
+    let totalPrice = 0;
+for (let i = 0; i < cart.length; i++) {
+ 
+  totalPrice += cart[i].price * cart[i].quantity;
+  totalItems += cart[i].quantity;
+}
+
+    cartInfo.textContent = `Carrinho: ${totalItems} itens | Total: R$ ${totalPrice}`;
 }
 
 function createCartNavbar() {
@@ -190,7 +200,11 @@ async function listPartnerProducts(partnerId) {
 
         addToCartButton.addEventListener('click', () => {
 
-            addCartItem(productName.textContent, parseInt(quantityField.value));
+           // Remove o 'R$ ' do início do texto do preço e converte para número
+    const priceText = productPrice.textContent.replace('R$ ', '').replace(',', '.');
+    const price = parseFloat(priceText); // Converte para número decimal
+
+    addCartItem(productName.textContent, price, parseInt(quantityField.value));
             
         });
 
