@@ -21,14 +21,13 @@ function getPartnerId() {
 // FUNÇÕES DO CARRINHO
 function addCartItem(productName, productQuantity) {
 
-    if(!cart){
-        alert(!cart);
-    }
+    if(cart.length === 0) createCartNavbar();
 
     cart.push({ name: productName, quantity: productQuantity});
 
-    alert(`${cart[cart.length-1].quantity} Unidades de ${cart[cart.length-1].name}`);
-    //add
+    updateCartNavbar();
+
+    //alert(`${cart[cart.length-1].quantity} Unidades de ${cart[cart.length-1].name}`);
 }
 
 function removeCartItem(){
@@ -39,23 +38,32 @@ function updateCart(){
     //update
 }
 
+function updateCartNavbar() {
+    const cartInfo = document.getElementById('cart-info');
+    cartInfo.textContent = `Carrinho: ${cart.length} itens | Total: R$ ${totalCartValue()}`;
+}
+
 function createCartNavbar() {
     const cartNavbar = document.createElement('div');
     cartNavbar.id = 'cart-navbar';
 
+    const cartInfo = document.createElement('p');
+    cartInfo.id = 'cart-info';
+    cartInfo.textContent = `Carrinho: ${cart.length} itens | Total: R$ ${totalCartValue()}`;
+    
   
-    const cartCount = document.createElement('span');
-    cartCount.textContent = `Carrinho: ${cart.length} itens`;
-  
-    const viewCartButton = document.createElement('button');
-    viewCartButton.textContent = 'Ver Carrinho';
-    // Add event listener to view cart button (redirect to cart page, etc.)
-  
-    cartNavbar.appendChild(cartCount);
-    cartNavbar.appendChild(viewCartButton);
-  
-    document.container.appendChild(cartNavbar);
+    cartNavbar.appendChild(cartInfo);
 
+  
+    document.body.appendChild(cartNavbar);
+
+}
+
+function totalCartValue() {
+
+
+
+    return 1;
 }
 
 
