@@ -44,11 +44,11 @@ function criarCardParceiro(parceiro) {
 
         card.addEventListener('click', () => {
           const partnerId = card.dataset.partnerId;
-          window.location.href = `${root}${routes.store}?partnerId=${partnerId}`;
+          window.location.href = `${router(routes.store)}?partnerId=${partnerId}`;
         });
 
         name.innerText = post.name;
-        image.src = `${root}${routes.assets}`;
+        image.src = `${router(routes.assets)}partner.png`;
 
         card.appendChild(image);
         card.appendChild(name);

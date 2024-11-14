@@ -160,7 +160,7 @@ async function listPartnerProducts(partnerId) {
             
             card.dataset.partnerId = post.id;
         
-            image.src = '../../../assets/foods.png';
+            image.src = `${root}${routes.assets}foods.png`;
             productName.innerText = post.name;
             productDescription.innerText = post.description;
             productPrice.innerText = `R$ ${formatPrice(post.price)}`;
