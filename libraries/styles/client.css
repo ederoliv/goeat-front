@@ -15,7 +15,8 @@ body {
 
 
 #goeat-logo {
-  margin-top: 20px;
+  margin: 5px;
+  width: 9%;
 }
 
 #container {
@@ -55,7 +56,7 @@ footer {
 
   padding: 20px;
 
-  background-color: black;
+  background-color: #623CA7;
   color: white;
 
   gap: 10px;
