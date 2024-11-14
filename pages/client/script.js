@@ -32,7 +32,7 @@ function criarCardParceiro(parceiro) {
     data.map((post) => {
 
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card animate__animated animate__bounceInLeft';
         const image = document.createElement('img');
         image.className = 'partner-logo';
         const name = document.createElement('h4');
