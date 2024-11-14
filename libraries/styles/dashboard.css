@@ -144,7 +144,7 @@ main {
 /*  SIDEBAR STARTS HERE  */
 
 #sidebar {
-  background: #232323;
+  background: #623CA7;
   grid-area: sidebar;
   overflow-y: auto;
   padding: 20px;
