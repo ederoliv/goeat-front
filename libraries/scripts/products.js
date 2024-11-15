@@ -17,7 +17,6 @@ if (userDataString) {
 }
 };
 
-
 function adicionarProdutoPage() {
   window.location.replace('adicionar.html');
 }
