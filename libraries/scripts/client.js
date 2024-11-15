@@ -1,3 +1,11 @@
+
+// Chamar a função ao carregar a página
+window.onload = function() {
+
+  listPartners();
+
+}
+
 // Função para criar um card de parceiro
 function criarCardParceiro(parceiro) {
     const card = document.createElement('div');
@@ -58,13 +66,6 @@ function criarCardParceiro(parceiro) {
     });
   }
     
-
-  // Chamar a função ao carregar a página
-  window.onload = function() {
-
-    listPartners();
-
-  }
 
   function w3_open() {
     document.getElementById("mySidebar").style.display = "block";

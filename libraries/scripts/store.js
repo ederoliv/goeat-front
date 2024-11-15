@@ -61,11 +61,14 @@ function createCartNavbar() {
     cartInfo.id = 'cart-info';
     cartInfo.textContent = `Carrinho: ${cart.length} itens | Total: R$ ${totalCartValue()}`;
     
-  
     cartNavbar.appendChild(cartInfo);
-
-  
     document.body.appendChild(cartNavbar);
+
+    cartNavbar.addEventListener('click', () => {
+        
+        
+        
+      });
 
 }
 
@@ -207,9 +210,6 @@ async function listPartnerProducts(partnerId) {
     addCartItem(productName.textContent, price, parseInt(quantityField.value));
             
         });
-
-
-
     });
 
     } catch {
@@ -217,5 +217,4 @@ async function listPartnerProducts(partnerId) {
     }
 
 }
-
 
