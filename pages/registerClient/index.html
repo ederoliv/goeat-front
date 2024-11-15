@@ -3,6 +3,7 @@
 <head>
 	<title>Goeat - Cadastrar-se</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="/libraries/styles/auth-responsivity.css">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,11 +11,11 @@
 <body>
 	<div class="container">
 		<div class="img">
-			<img src="../../assets/banner.svg">
+			<img src="/libraries/assets/banner.svg">
 		</div>
 		<div class="login-content">
 			<form action="index.html">
-				<img class="logo" src="../../assets/goeat-logo.svg">
+				<img class="logo" src="/libraries/assets/goeat-logo-pg.svg">
 
 						<input id="name" type="text" class="input" placeholder="Nome">
 
@@ -30,12 +31,12 @@
 
 						<input id="confirmPassword"type="password" class="input" placeholder="Insira sua senha novamente">
         
-            	<input type="button" class="btn" value="Cadastrar-se" onclick="register()">
+            	<input type="button" class="btn" value="Cadastrar-se" onclick="registerClient()">
 				<a href="../loginClient/index.html">ou Entre com sua conta</a>
             </form>
         </div>
     </div>
 	<script src="https://cdn.jsdelivr.net/npm/multiform-validator@2.1.2/dist/bundle.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="/libraries/scripts/auth/register.js"></script>
 </body>
 </html>

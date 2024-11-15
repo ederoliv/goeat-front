@@ -1,6 +1,7 @@
 /*estilo para gerar um table com cantos arredondados*/
 
 table {
+    margin-top: 30px;
     border-collapse: separate; /* Para garantir que o border-radius funcione */
     border-spacing: 0; /* Remove espaços entre as células */
     border-radius: 8px; /* Arredonda os cantos da tabela */

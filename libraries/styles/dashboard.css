@@ -127,7 +127,6 @@ body {
   padding: 7px;
 }
 
-
 /*  SIDEBAR STARTS HERE  */
 
 #sidebar {
@@ -141,20 +140,13 @@ body {
 
 .sidebar__title {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  color: #f3f4f6;
-  margin-bottom: 30px;
-  /* color: #E85B6B; */
-}
-
-.sidebar__img {
-  display: flex;
-  align-items: center;
+  margin-bottom: 20px;
 }
 
 .sidebar__title > div > img {
-  width: 75px;
+  width: 100px;
   object-fit: contain;
 }
 
