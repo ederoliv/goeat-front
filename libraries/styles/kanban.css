@@ -7,6 +7,17 @@ body {
   background-color: #f4f4f4;
 }
 
+main {
+  background: #f3f4f6;
+  grid-area: main;
+  overflow-y: auto;
+  
+  display: flex;
+  justify-content: center; /* Alinha horizontalmente no centro */
+  align-items: flex-start; /* Alinha no início do contêiner verticalmente (próximo ao topo) */
+  padding-top: 20px; /* Ajusta a distância dos itens em relação ao topo */
+}
+
 .kanban-container {
   display: flex;
   gap: 20px;

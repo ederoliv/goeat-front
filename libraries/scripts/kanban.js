@@ -1,3 +1,11 @@
+window.onload = function() {
+  const userDataString = sessionStorage.getItem('userData');
+if (userDataString) {
+    const userData = JSON.parse(userDataString);
+    document.getElementById('userName').textContent = userData.name;
+}
+};
+
 const kanbanItems = document.querySelectorAll('.kanban-item');
 const kanbanColumns = document.querySelectorAll('.kanban-column');
 

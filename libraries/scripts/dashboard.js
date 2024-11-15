@@ -1,12 +1,3 @@
-window.onload = function() {
-  const userDataString = sessionStorage.getItem('userData');
-if (userDataString) {
-    const userData = JSON.parse(userDataString);
-    document.getElementById('userName').textContent = userData.name + " " + userData.partnerId;
-}
-};
-
-// Sidebar Toggle Codes;
 
 var sidebarOpen = false;
 var sidebar = document.getElementById("sidebar");
