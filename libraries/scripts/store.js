@@ -1,4 +1,3 @@
-var cart = [];
 
 
 window.onload = function () {
@@ -18,66 +17,6 @@ function getPartnerId() {
 
 
 
-// FUNÇÕES DO CARRINHO
-function addCartItem(productName, productPrice, productQuantity) {
-
-    if(cart.length === 0) createCartNavbar();
-
-    cart.push({ name: productName, price: productPrice, quantity: productQuantity});
-
-    updateCartNavbar();
-
-    //alert(`${cart[cart.length-1].quantity} Unidades de ${cart[cart.length-1].name}`);
-}
-
-function removeCartItem(){
-    //remove
-}
-
-function updateCart(){
-    //update
-}
-
-function updateCartNavbar() {
-    const cartInfo = document.getElementById('cart-info');
-
-    //calcula o total de itens do cart
-    let totalItems = 0;
-    let totalPrice = 0;
-for (let i = 0; i < cart.length; i++) {
- 
-  totalPrice += cart[i].price * cart[i].quantity;
-  totalItems += cart[i].quantity;
-}
-
-    cartInfo.textContent = `Carrinho: ${totalItems} itens | Total: R$ ${totalPrice}`;
-}
-
-function createCartNavbar() {
-    const cartNavbar = document.createElement('div');
-    cartNavbar.id = 'cart-navbar';
-
-    const cartInfo = document.createElement('p');
-    cartInfo.id = 'cart-info';
-    cartInfo.textContent = `Carrinho: ${cart.length} itens | Total: R$ ${totalCartValue()}`;
-    
-    cartNavbar.appendChild(cartInfo);
-    document.body.appendChild(cartNavbar);
-
-    cartNavbar.addEventListener('click', () => {
-        
-        
-        
-      });
-
-}
-
-function totalCartValue() {
-
-
-
-    return 1;
-}
 
 
 
@@ -167,7 +106,6 @@ async function listPartnerProducts(partnerId) {
             productName.innerText = post.name;
             productDescription.innerText = post.description;
             productPrice.innerText = `R$ ${formatPrice(post.price)}`;
-
 
 
             minusButton.innerText = '-';
