@@ -70,28 +70,123 @@ function cartModal() {
   const cartModal = document.createElement("div");
   cartModal.id = "cart-modal";
 
-  cartModal.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
-  cartModal.style.display = "flex";
-  cartModal.style.flexDirection = "column";
-  cartModal.style.justifyContent = "center";
-  cartModal.style.alignItems = "center";
-
   // Mensagem no modal
-  const message = document.createElement("p");
-  message.innerText = "Olá!";
-  message.style.fontSize = "18px";
-  message.style.marginBottom = "20px";
+  const cartTitle = document.createElement("p");
+  cartTitle.id = "cart-title";
+  cartTitle.innerText = "Seu carrinho de compras";
+
 
   // Botão de Sair
-  const exitButton = document.createElement("button");
-  exitButton.innerText = "Sair";
-  exitButton.style.padding = "10px 20px";
-  exitButton.style.border = "none";
-  exitButton.style.borderRadius = "5px";
-  exitButton.style.backgroundColor = "#dc3545";
-  exitButton.style.color = "#fff";
-  exitButton.style.fontSize = "16px";
-  exitButton.style.cursor = "pointer";
+  const exitButton = document.createElement("i");
+  exitButton.id = "exit-button";
+  exitButton.className = "fa fa-times fa-2x";
+
+  const divItemList = document.createElement("div");
+  divItemList.id = "div-item-list";
+
+
+
+  cart.map((item) => {
+
+    const cartItemCard = document.createElement('div');
+    cartItemCard.className = 'cart-item-card';
+
+    const cardDetails = document.createElement('div');
+    cardDetails.className = 'card-details';
+
+
+    const image = document.createElement('img');
+    image.className = 'product-image';
+
+
+    const divProductDetails = document.createElement('div');
+    divProductDetails.className = 'product-details';
+
+    const productName = document.createElement('h2');
+    productName.className = 'product-name';
+
+    const productDescription = document.createElement('p');
+    productDescription.className = 'product-description';
+
+    const productPrice = document.createElement('p');
+    productPrice.className = 'product-price';
+
+
+    const divQuantity = document.createElement('div');
+    divQuantity.className = 'div-quantity';
+
+    const plusButton = document.createElement('button');
+    plusButton.className = 'quantity-button';
+
+    const quantityField = document.createElement('input');
+    quantityField.type = 'text';
+    quantityField.className = 'quantity-field';
+
+    const minusButton = document.createElement('button');
+    minusButton.className = 'quantity-button';
+
+
+    const removeItemButton = document.createElement('button');
+    removeItemButton.className = 'remove-to-cart-button';
+
+    const removeToCartButtonIcon = document.createElement('i');
+    removeToCartButtonIcon.className = 'fa fa-trash fa-3x remove-to-cart-button-icon';
+
+
+    
+    cartItemCard.dataset.partnerId = item.id;
+
+    image.src = `${root}${routes.assets}foods.png`;
+    productName.innerText = item.name;
+    productDescription.innerText = item.description;
+    productPrice.innerText = `R$ ${formatPrice(item.price)}`;
+
+
+    minusButton.innerText = '-';
+    quantityField.value = 0;
+    plusButton.innerText = '+';
+
+                
+removeItemButton.appendChild(removeToCartButtonIcon);
+
+divQuantity.append(minusButton, quantityField, plusButton);
+
+divProductDetails.append(productName, productDescription, productPrice);
+
+removeItemButton.appendChild(removeToCartButtonIcon);
+
+cardDetails.append(image, divProductDetails, divQuantity);
+
+cartItemCard.append(cardDetails, removeItemButton);
+
+divItemList.appendChild(cartItemCard);
+
+
+//Eventos
+
+plusButton.addEventListener('click', () => {
+    quantityField.value = parseInt(quantityField.value) + 1;
+});
+
+        
+minusButton.addEventListener('click', () => {
+    quantityField.value = Math.max(0, parseInt(quantityField.value) - 1);
+});
+
+removeItemButton.addEventListener('click', () => {
+
+   // Remove o 'R$ ' do início do texto do preço e converte para número
+const priceText = productPrice.textContent.replace('R$ ', '').replace(',', '.');
+const price = parseFloat(priceText); // Converte para número decimal
+
+addCartItem(productName.textContent, price, parseInt(quantityField.value));
+    
+});
+
+
+  });
+
+
 
   // Fechar o modal ao clicar em "Sair"
   exitButton.addEventListener("click", () => {
@@ -99,8 +194,8 @@ function cartModal() {
   });
 
   // Adiciona elementos ao modal
-  cartModal.appendChild(message);
-  cartModal.appendChild(exitButton);
+  cartModal.append(exitButton, cartTitle, divItemList);
+  
 
   // Adiciona modal ao overlay
   overlay.appendChild(cartModal);
