@@ -5,33 +5,49 @@ function addCartItem(productName, productPrice, productQuantity) {
 
     if(cart.length === 0) createCartNavbar();
 
-    cart.push({ name: productName, price: productPrice, quantity: productQuantity});
 
+    updateCart(productName, productPrice, productQuantity);
     updateCartNavbar();
 
-    //alert(`${cart[cart.length-1].quantity} Unidades de ${cart[cart.length-1].name}`);
 }
 
 function removeCartItem(){
     //remove
 }
 
-function updateCart(){
-    //update
+function updateCart(productName, productPrice, productQuantity){
+
+    let productIsOnCart = false;
+    let cartProductIndex = 0;
+
+    for(i = 0; i < cart.length; i++){
+
+        if(productName == cart[i].name){
+            productIsOnCart = true;
+            cartProductIndex = i;
+        }
+    }
+
+    if(productIsOnCart === true){
+        cart[cartProductIndex].quantity += (productQuantity - cart[cartProductIndex].quantity);
+    } else {
+        cart.push({ name: productName, price: productPrice, quantity: productQuantity});
+    }
 }
 
 function updateCartNavbar() {
+
     const cartInfo = document.getElementById('cart-info');
 
     //calcula o total de itens do cart
     let totalItems = 0;
     let totalPrice = 0;
+    
 for (let i = 0; i < cart.length; i++) {
  
   totalPrice += cart[i].price * cart[i].quantity;
   totalItems += cart[i].quantity;
 }
-
     cartInfo.textContent = `Carrinho: ${totalItems} itens | Total: R$ ${totalPrice}`;
 }
 
@@ -41,7 +57,6 @@ function createCartNavbar() {
 
     const cartInfo = document.createElement('p');
     cartInfo.id = 'cart-info';
-    cartInfo.textContent = `Carrinho: ${cart.length} itens | Total: R$ ${totalCartValue()}`;
     
     cartNavbar.appendChild(cartInfo);
     document.body.appendChild(cartNavbar);
@@ -51,13 +66,6 @@ function createCartNavbar() {
         cartModal();
         
       });
-
-}
-
-function totalCartValue() {
-
-    return 1;
-
 }
 
 function cartModal() {
