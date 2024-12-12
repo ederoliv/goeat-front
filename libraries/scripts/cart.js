@@ -68,6 +68,16 @@ function createCartNavbar() {
       });
 }
 
+function createModal() {
+
+    const overlay = document.createElement("div");
+    overlay.className = "overlay";
+
+    const modal = document.createElement("div");
+    modal.className = "modal "
+
+}
+
 function cartModal() {
 
   // Criação do overlay

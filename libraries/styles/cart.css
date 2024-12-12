@@ -1,101 +1,148 @@
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    background-color: rgba(0, 0, 0, 0.5);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-#cart-modal {
-    background-color: #fff;
-    width: 40%;
-    height: 50%;
-    border-radius: 10px;
-    padding: 10px;
-
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
+/* Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-#cart-title {
-    position: absolute;
-    font-size: 20px;
-    margin-top: 5px;
-    font-weight: 600;
-    text-transform: uppercase;
+/* Modal */
+.modal {
+  width: 500px;
+  max-width: 90%;
+  max-height: 80%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-#exit-button {
-
-    border: none;
-    color: #623CA7;
-    cursor: pointer;
-
-    position: relative;
-    margin: 0 0 auto auto;
+/* Header */
+.modal-header {
+  background: #f0f4f8;
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#div-item-list {
-    margin-top: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.modal-header .close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
 }
 
-.cart-item-card {
+.modal-header .close-button:hover {
+  color: #333;
+}
 
-    display: flex;
-    flex-direction: row;
-  
-    width: 100%;
-  
-    justify-content: space-between;
-  
-    border-radius: 10px;
-  
-    border: solid 1px #00000040;
-  
-    box-shadow: 1px 6px 2px 0px #00000040;
-  
-  
-  }
+/* Content */
+.modal-content {
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+}
 
-.remove-to-cart-button {
+.modal-content form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
 
-    width: 100px;
-    padding: 10px;
-    border-radius: 0 10px 10px 0;
-    background-color: #FF5555;
-    border: none;
-    box-shadow: 0px 6px 2px rgba(0, 0, 0, 0.25);
-  
-  }
-  
-  .remove-to-cart-button-icon {
-    color: white;
-  }
+.modal-content form input,
+.modal-content form textarea {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9f9f9;
+  transition: border-color 0.3s;
+}
 
-@media (max-width: 1400px) {
-    #cart-modal {
-        width: 50%;
-    }
-  }
+.modal-content form input:focus,
+.modal-content form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  background: #fff;
+}
 
-@media (max-width: 1200px) {
-    #cart-modal {
-        width: 60%;
-    }
+/* Footer */
+.modal-footer {
+  padding: 15px;
+  background: #f0f4f8;
+  border-top: 1px solid #ddd;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-footer .cancel-button,
+.modal-footer .save-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-footer .cancel-button {
+  background: #e0e0e0;
+  color: #555;
+}
+
+.modal-footer .cancel-button:hover {
+  background: #d6d6d6;
+}
+
+.modal-footer .save-button {
+  background: #007bff;
+  color: #fff;
+}
+
+.modal-footer .save-button:hover {
+  background: #0056b3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
   }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
