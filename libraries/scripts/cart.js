@@ -63,18 +63,74 @@ function createCartNavbar() {
 
     cartNavbar.addEventListener('click', () => {
         
-        cartModal();
+        createModal();
         
       });
 }
 
 function createModal() {
 
+
+    //criando os elemntos do modal
+    const container = document.getElementById('container');
+
     const overlay = document.createElement("div");
     overlay.className = "overlay";
 
     const modal = document.createElement("div");
-    modal.className = "modal "
+    modal.className = "modal";
+
+    const modalHeader = document.createElement("div");
+    modalHeader.className = "modal-header";
+
+    const cartTitle = document.createElement("h2");
+    
+    const closeButton = document.createElement("button");
+    closeButton.className = "close-button fa fa-times";
+
+    const modalContent = document.createElement("div");
+    modalContent.className = "modal-content";
+
+    const modalFooter = document.createElement("div");
+    modalFooter.className = "modal-footer";
+
+    const cancelButton = document.createElement("button");
+    cancelButton.className = "cancel-button";
+
+    const saveButton = document.createElement("button");
+    saveButton.className = "save-button";
+
+
+    //atribuindo valores, textos aos elementos etc.
+    cartTitle.innerText = "Seu carrinho";
+
+    cancelButton.innerText = "Cancelar";
+
+    saveButton.innerText = "Salvar";
+
+
+
+    //atrelando os elementos filhos aos elementos pais
+
+    modalFooter.append(cancelButton, saveButton);
+
+    //modalContent
+
+    modalHeader.append(cartTitle, closeButton);
+
+    modal.append(modalHeader, modalContent, modalFooter);
+
+    overlay.appendChild(modal);
+
+    container.appendChild(overlay);
+
+    closeButton.addEventListener('click', () => {
+        overlay.style.display = 'none';
+      });
+      
+    cancelButton.addEventListener('click', () => {
+        overlay.style.display = 'none';
+      });
 
 }
 
