@@ -122,17 +122,9 @@
   color: #555;
 }
 
-.modal-footer .cancel-button:hover {
-  background: #d6d6d6;
-}
-
 .modal-footer .save-button {
-  background: #007bff;
+  background: #06CF90;
   color: #fff;
-}
-
-.modal-footer .save-button:hover {
-  background: #0056b3;
 }
 
 /* Animations */

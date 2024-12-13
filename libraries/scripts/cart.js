@@ -94,8 +94,8 @@ function createModal() {
     const modalFooter = document.createElement("div");
     modalFooter.className = "modal-footer";
 
-    const cancelButton = document.createElement("button");
-    cancelButton.className = "cancel-button";
+    const totalPedido = document.createElement("button");
+    totalPedido.className = "cancel-button";
 
     const saveButton = document.createElement("button");
     saveButton.className = "save-button";
@@ -104,9 +104,9 @@ function createModal() {
     //atribuindo valores, textos aos elementos etc.
     cartTitle.innerText = "Seu carrinho";
 
-    cancelButton.innerText = "Cancelar";
+    totalPedido.innerText = `Total do pedido:${1}`;
 
-    saveButton.innerText = "Salvar";
+    saveButton.innerText = "Fazer Pedido";
 
 
     //carrega item por item do carrinho
@@ -128,9 +128,6 @@ function createModal() {
     
         const productName = document.createElement('h2');
         productName.className = 'product-name';
-    
-        const productDescription = document.createElement('p');
-        productDescription.className = 'product-description';
     
         const productPrice = document.createElement('p');
         productPrice.className = 'product-price';
@@ -162,7 +159,6 @@ function createModal() {
     
         image.src = `${root}${routes.assets}foods.png`;
         productName.innerText = item.name;
-        productDescription.innerText = item.description;
         productPrice.innerText = `R$ ${formatPrice(item.price)}`;
     
     
@@ -175,7 +171,7 @@ function createModal() {
     
     divQuantity.append(minusButton, quantityField, plusButton);
     
-    divProductDetails.append(productName, productDescription, productPrice);
+    divProductDetails.append(productName, productPrice);
     
     removeItemButton.appendChild(removeToCartButtonIcon);
     
@@ -212,7 +208,7 @@ function createModal() {
 
     //atrelando os elementos filhos aos elementos pais
 
-    modalFooter.append(cancelButton, saveButton);
+    modalFooter.append(totalPedido, saveButton);
 
     modalHeader.append(cartTitle, closeButton);
 
@@ -223,10 +219,6 @@ function createModal() {
     container.appendChild(overlay);
 
     closeButton.addEventListener('click', () => {
-        overlay.style.display = 'none';
-      });
-      
-    cancelButton.addEventListener('click', () => {
         overlay.style.display = 'none';
       });
 
