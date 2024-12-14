@@ -16,10 +16,6 @@ function getPartnerId() {
 }
 
 
-
-
-
-
 //REQUISIÇÕES PARA API
 async function loadPartnerData(partnerId) {
 

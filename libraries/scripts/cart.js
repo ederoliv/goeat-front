@@ -35,21 +35,38 @@ function updateCart(productName, productPrice, productQuantity){
     }
 }
 
+function calculateCartTotalPrice(clientCart) {
+
+    let totalPrice = 0;
+
+    for (let i = 0; i < clientCart.length; i++) {
+ 
+        totalPrice += clientCart[i].price * clientCart[i].quantity;
+      }
+
+    return totalPrice;
+}
+
+function calculateCartTotalItems(clientCart) {
+
+    let totalItems = 0;
+    
+    for (let i = 0; i < clientCart.length; i++) {
+      totalItems += clientCart[i].quantity;
+    }
+
+    return totalItems;
+}
+
 function updateCartNavbar() {
 
     const cartInfo = document.getElementById('cart-info');
-
-    //calcula o total de itens do cart
-    let totalItems = 0;
-    let totalPrice = 0;
     
-for (let i = 0; i < cart.length; i++) {
- 
-  totalPrice += cart[i].price * cart[i].quantity;
-  totalItems += cart[i].quantity;
-}
+    let totalPrice = calculateCartTotalPrice(cart);
+    let totalItems = calculateCartTotalItems(cart);
     cartInfo.textContent = `Carrinho: ${totalItems} itens | Total: R$ ${totalPrice}`;
 }
+
 
 function createCartNavbar() {
     const cartNavbar = document.createElement('div');
@@ -63,13 +80,12 @@ function createCartNavbar() {
 
     cartNavbar.addEventListener('click', () => {
         
-        createModal();
+        loadCart();
         
       });
 }
 
-function createModal() {
-
+function loadCart() {
 
     //criando os elemntos do modal
     const container = document.getElementById('container');
@@ -104,7 +120,9 @@ function createModal() {
     //atribuindo valores, textos aos elementos etc.
     cartTitle.innerText = "Seu carrinho";
 
-    totalPedido.innerText = `Total do pedido:${1}`;
+    const lastPrice = calculateCartTotalPrice(cart);
+    totalPedido.innerText = `Total do pedido: R$ ${lastPrice}`;
+    
 
     saveButton.innerText = "Fazer Pedido";
 
@@ -118,34 +136,30 @@ function createModal() {
         const cardDetails = document.createElement('div');
         cardDetails.className = 'card-details';
     
-    
         const image = document.createElement('img');
-        image.className = 'product-image';
-    
+        image.className = 'cart-card-product-image';
     
         const divProductDetails = document.createElement('div');
-        divProductDetails.className = 'product-details';
+        divProductDetails.className = 'cart-card-product-details';
     
         const productName = document.createElement('h2');
-        productName.className = 'product-name';
+        productName.className = 'cart-card-product-name';
     
         const productPrice = document.createElement('p');
-        productPrice.className = 'product-price';
-    
+        productPrice.className = 'cart-card-product-price';
     
         const divQuantity = document.createElement('div');
-        divQuantity.className = 'div-quantity';
+        divQuantity.className = 'cart-card-div-quantity';
     
         const plusButton = document.createElement('button');
-        plusButton.className = 'quantity-button';
+        plusButton.className = 'cart-card-quantity-button';
     
         const quantityField = document.createElement('input');
         quantityField.type = 'text';
-        quantityField.className = 'quantity-field';
+        quantityField.className = 'cart-card-quantity-field';
     
         const minusButton = document.createElement('button');
-        minusButton.className = 'quantity-button';
-    
+        minusButton.className = 'cart-card-quantity-button';
     
         const removeItemButton = document.createElement('button');
         removeItemButton.className = 'remove-to-cart-button';
@@ -163,7 +177,7 @@ function createModal() {
     
     
         minusButton.innerText = '-';
-        quantityField.value = 0;
+        quantityField.value = item.quantity;
         plusButton.innerText = '+';
     
                     
@@ -173,36 +187,66 @@ function createModal() {
     
     divProductDetails.append(productName, productPrice);
     
-    removeItemButton.appendChild(removeToCartButtonIcon);
-    
     cardDetails.append(image, divProductDetails, divQuantity);
     
     cartItemCard.append(cardDetails, removeItemButton);
     
     modalContent.appendChild(cartItemCard);
 
-    
+
     
     //Eventos
     
     plusButton.addEventListener('click', () => {
         quantityField.value = parseInt(quantityField.value) + 1;
+
+        item.quantity = quantityField.value;
+
+        const last = calculateCartTotalPrice(cart);
+        totalPedido.innerText = `Total do pedido: R$ ${last}`;
+
     });
     
             
     minusButton.addEventListener('click', () => {
-        quantityField.value = Math.max(0, parseInt(quantityField.value) - 1);
+        const newQuantity = Math.max(0, parseInt(quantityField.value) - 1);
+        quantityField.value = newQuantity;
+        
+        if (newQuantity === 0) {
+            cart = cart.filter(cartItem => cartItem !== item); // Remove o item do array
+            cartItemCard.remove(); // Remove o item do DOM
+
+            if(cart.length === 0){
+                const existingOverlay = document.querySelector('.overlay');
+                    if (existingOverlay) {
+                    existingOverlay.remove();
+                }
+            }
+
+        } else {
+            item.quantity = newQuantity;
+        }
+        
+        const last = calculateCartTotalPrice(cart);
+        totalPedido.innerText = `Total do pedido: R$ ${last}`;
     });
+    
     
     removeItemButton.addEventListener('click', () => {
-    
-       // Remove o 'R$ ' do início do texto do preço e converte para número
-    const priceText = productPrice.textContent.replace('R$ ', '').replace(',', '.');
-    const price = parseFloat(priceText); // Converte para número decimal
-    
-    addCartItem(productName.textContent, price, parseInt(quantityField.value));
-        
+        cart = cart.filter(cartItem => cartItem !== item); // Remove o item do array
+        cartItemCard.remove(); // Remove o elemento do DOM
+        if(cart.length === 0){
+            const existingOverlay = document.querySelector('.overlay');
+                if (existingOverlay) {
+                existingOverlay.remove();
+            }
+        }else{
+            last = calculateCartTotalPrice(cart);
+            totalPedido.innerText = `Total do pedido: R$ ${last}`;
+        }
+
     });
+    
   
   });
 
@@ -221,5 +265,4 @@ function createModal() {
     closeButton.addEventListener('click', () => {
         overlay.style.display = 'none';
       });
-
 }
