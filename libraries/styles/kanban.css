@@ -4,7 +4,7 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f4;
+  background-color: var(--goeat-tertiary);
 }
 
 main {
@@ -49,7 +49,7 @@ main {
 
 .kanban-category {
   padding: 10px;
-  color: white;
+  color: var(--goeat-secondary);
   text-align: center;
   font-weight: bold;
   border-radius: 5px;
@@ -60,23 +60,23 @@ main {
 
 /* Cores das categorias */
 #em-espera-category {
-  background-color: #FF5555;
+  background-color: var(--goeat-red);
 }
 
 #preparando-category {
-  background-color: #53BDEB;
+  background-color: var(--goeat-blue);
 }
 
 #a-caminho-category {
-  background-color: #FCCC48;
+  background-color: var(--goeat-yellow);
 }
 
 #finalizado-category {
-  background-color: #06CF90;
+  background-color: var(--goeat-green);
 }
 
 .kanban-item {
-  background-color: #fff;
+  background-color: var(--goeat-secondary);
   margin: 10px 0;
   padding: 10px;
   border: 1px solid #ccc;
@@ -98,19 +98,19 @@ main {
 
 /* Coloração do número do pedido por categoria */
 #em-espera-column .kanban-item-title span {
-  color: #FF5555;
+  color: var(--goeat-red);
 }
 
 #preparando-column .kanban-item-title span {
-  color: #53BDEB;
+  color:var(--goeat-blue);
 }
 
 #a-caminho-column .kanban-item-title span {
-  color: #FCCC48;
+  color: var(--goeat-yellow);
 }
 
 #finalizado-column .kanban-item-title span {
-  color: #06CF90;
+  color: var(--goeat-green);
 }
 
 /* Lista de itens do pedido */

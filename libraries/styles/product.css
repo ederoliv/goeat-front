@@ -12,7 +12,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3ea175;
+  background: var(--goeat-green);
   border-radius: 10px;
 }
 
@@ -30,7 +30,7 @@ body {
   font-family: "Lato", sans-serif;
 }
 .active_menu_linke {
-  background-color: #06CF90;
+  background-color: var(--goeat-green);
 }
 
 .text-primary-p {
@@ -48,11 +48,11 @@ body {
 }
 
 .text-lightblue {
-  color: #469cac;
+  color: var(--goeat-blue);
 }
 
 .text-red {
-  color: #cc3d38;
+  color: var(--goeat-red);
 }
 
 .text-yellow {
@@ -60,7 +60,7 @@ body {
 }
 
 .text-green {
-  color: #3b9668;
+  color: var(--goeat-green);
 }
 
 .container {
@@ -135,13 +135,13 @@ body {
 	margin-bottom: 20px;
 }
 #deleteButton {
-  background-color: #e65061;
+  background-color: var(--goeat-red);
   color: white;
 }
 
 #modalButton {
   color: white;
-  background-color: #e65061;
+  background-color: var(--goeat-red);
 }
 
 /* fim modal*/
@@ -194,10 +194,10 @@ main {
 
 #productButton {
   color: white;
-  background-color: #06CF90;
+  background-color: var(--goeat-green);
 }
 
 #searchButton {
   color: white;
-  background-color: #53BDEB;
+  background-color: var(--goeat-blue);
 }

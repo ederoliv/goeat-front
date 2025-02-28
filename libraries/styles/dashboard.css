@@ -12,7 +12,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3ea175;
+  background: var(--goeat-tertiary);
   border-radius: 10px;
 }
 
@@ -74,7 +74,7 @@ body {
 }
 
 .navbar {
-  background: #ffffff;
+  background: var(--goeat-secondary);
   grid-area: nav;
   height: 60px;
   display: flex;
@@ -130,7 +130,7 @@ body {
 /*  SIDEBAR STARTS HERE  */
 
 #sidebar {
-  background: #623CA7;
+  background: #232323;
   grid-area: sidebar;
   overflow-y: auto;
   padding: 20px;
@@ -161,7 +161,7 @@ body {
 }
 
 .sidebar__menu > h2 {
-  color: #3ea175;
+  color: var(--goeat-tertiary);
   font-size: 16px;
   margin-top: 15px;
   margin-bottom: 5px;
@@ -178,11 +178,11 @@ body {
 
 .active_menu_link {
   background: rgba(62, 161, 117, 0.3);
-  color: #3ea175;
+  color: var(--goeat-tertiary);
 }
 
 .active_menu_link a {
-  color: #3ea175 !important;
+  color: var(--goeat-tertiary) !important;
 }
 
 .sidebar__link > a {

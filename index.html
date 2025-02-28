@@ -7,10 +7,14 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <link
+    rel="stylesheet"
+    href="libraries/styles/colors.css"
+  />
     <title>Goeat by Eder Oliveira</title>
     <style>
         body {
-            background-color: #623CA7;
+            background-color: var(--goeat-primary);
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
@@ -27,8 +31,8 @@
 
         .button {
             background-color: transparent;
-            border: 2px solid #06CF90;
-            color: #06CF90;
+            border: 2px solid var(--goeat-tertiary);
+            color: var(--goeat-tertiary);
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
@@ -39,12 +43,12 @@
         }
         
         i {
-            color: white;
+            color: var(--goeat-secondary);
         }
 
         .button:hover {
-            background-color: #06CF90;
-            color: white;
+            background-color: var(--goeat-tertiary);
+            color: var(--goeat-secondary);
         }
     </style>
 </head>
