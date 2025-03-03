@@ -18,19 +18,16 @@ if (userDataString) {
 };
 
 
-function adicionarProdutoPage() {
-  window.location.replace('adicionar.html');
+function adicionarProdutoModal() {
+  alert("adicionarProdutoModal");
+}
+
+function editarProdutoModal(){
+  alert("editarProdutoModal");
 }
 
 function abrirModal() {
   document.getElementById("modal").style.display = "block";
-}
-
-// Função para fechar o modal quando o usuário clica no X
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() {
-  
-  document.getElementById("modal").style.display = "none";
 }
 
 
@@ -127,10 +124,6 @@ function alertaSucesso() {
 document.getElementById("modal").style.display = "block";
 }
 
-var span = document.getElementsByClassName("close")[0];
-span.onclick = fechar();
-
 function fechar() {
-
 document.getElementById("modal").style.display = "none";
 }

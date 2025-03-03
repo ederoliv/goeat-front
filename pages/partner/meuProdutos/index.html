@@ -37,7 +37,7 @@
       <main>
         <div id="modal" class="modal">
           <div class="modal-content">
-            <span class="close">&times;</span>
+            <span id="close" class="close" onclick="fechar()">&times;</span>
 
               <div class="modal-inputs">
               <input class="input-modal" id="codeInput" type="text" placeholder="Digite o código do produto...">
@@ -52,7 +52,7 @@
 
             <input type="text" class="input" id="searchInput" placeholder="Pesquisar produtos">
             <input type="button" class="input" id="searchButton"  value="Pesquisar">
-            <input type="button" class="input" id="productButton" value="Adicionar produto" onclick="adicionarProdutoPage()">
+            <input type="button" class="input" id="productButton" value="Adicionar produto" onclick="adicionarProdutoModal()">
             <input type="button" class="input" id="deleteButton"  value="Excluir produto" onclick="abrirModal()">
           </div>
 
