@@ -19,15 +19,74 @@ if (userDataString) {
 
 
 function adicionarProdutoModal() {
-  alert("adicionarProdutoModal");
+  
 }
 
 function editarProdutoModal(){
   alert("editarProdutoModal");
 }
 
-function abrirModal() {
-  document.getElementById("modal").style.display = "block";
+
+function deleteProductModal() {
+  let modal = document.getElementById('modal');
+
+  // Se o modal já existir, apenas o exibe
+  if (modal) {
+    modal.style.display = 'block';
+    return;
+  }
+
+  // Cria o elemento div para o modal
+  modal = document.createElement('div');
+  modal.id = 'modal';
+  modal.className = 'modal';
+
+  // Cria o elemento div para o conteúdo do modal
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+
+  // Cria o elemento span para o botão de fechar
+  const closeSpan = document.createElement('span');
+  closeSpan.id = 'close';
+  closeSpan.className = 'close';
+  closeSpan.innerHTML = '&times;';
+  closeSpan.onclick = fechar; // Atribui o evento onclick
+
+  // Cria o elemento div para os inputs do modal
+  const modalInputs = document.createElement('div');
+  modalInputs.className = 'modal-inputs';
+
+  // Cria o input para o código do produto
+  const codeInput = document.createElement('input');
+  codeInput.className = 'input-modal';
+  codeInput.id = 'codeInput';
+  codeInput.type = 'text';
+  codeInput.placeholder = 'Digite o código do produto...';
+
+  // Cria o botão de excluir
+  const deleteButton = document.createElement('input');
+  deleteButton.id = 'deleteButton';
+  deleteButton.className = 'input-modal';
+  deleteButton.type = 'button';
+  deleteButton.value = 'Excluir';
+  deleteButton.onclick = deleteProducts;
+
+  // Adiciona os inputs ao div de inputs
+  modalInputs.appendChild(codeInput);
+  modalInputs.appendChild(deleteButton);
+
+  // Adiciona o botão de fechar e os inputs ao conteúdo do modal
+  modalContent.appendChild(closeSpan);
+  modalContent.appendChild(modalInputs);
+
+  // Adiciona o conteúdo ao modal
+  modal.appendChild(modalContent);
+
+  // Adiciona o modal ao corpo do documento
+  document.body.appendChild(modal);
+
+  // Exibe o modal
+  modal.style.display = 'block';
 }
 
 
@@ -124,6 +183,9 @@ function alertaSucesso() {
 document.getElementById("modal").style.display = "block";
 }
 
+// Função para fechar o modal
 function fechar() {
-document.getElementById("modal").style.display = "none";
+  const modal = document.getElementById('modal');
+  modal.style.display = 'none';
 }
+
