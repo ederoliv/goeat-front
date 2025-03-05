@@ -18,8 +18,122 @@ if (userDataString) {
 };
 
 
-function adicionarProdutoModal() {
-  
+function addProductModal() {
+  let modal = document.getElementById('modal');
+
+
+  // Se o modal já existir, remove o conteúdo antigo
+  if (modal) {
+    modal.innerHTML = ''; // Limpa o conteúdo do modal
+  } else {
+    // Cria o elemento div para o modal
+    modal = document.createElement('div');
+    modal.id = 'modal';
+    modal.className = 'modal';
+    document.body.appendChild(modal);
+  }
+
+  // Cria o elemento div para o conteúdo do modal
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+
+  // Cria o elemento span para o botão de fechar
+  const closeSpan = document.createElement('span');
+  closeSpan.id = 'close';
+  closeSpan.className = 'close';
+  closeSpan.innerHTML = '&times;';
+  closeSpan.onclick = fechar; // Atribui o evento onclick
+
+  // Cria o elemento div para os inputs do modal
+  const modalInputs = document.createElement('div');
+  modalInputs.className = 'modal-inputs';
+
+  // Cria o input para o nome do produto
+  const nameInput = document.createElement('input');
+  nameInput.className = 'input-modal';
+  nameInput.id = 'nameInput';
+  nameInput.type = 'text';
+  nameInput.placeholder = 'Nome do produto...';
+
+  // Cria o input para a descrição do produto
+  const descriptionInput = document.createElement('input');
+  descriptionInput.className = 'input-modal';
+  descriptionInput.id = 'descriptionInput';
+  descriptionInput.type = 'text';
+  descriptionInput.placeholder = 'Descrição do produto...';
+
+  // Cria o input para a URL da imagem do produto
+  const imageUrlInput = document.createElement('input');
+  imageUrlInput.className = 'input-modal';
+  imageUrlInput.id = 'imageUrlInput';
+  imageUrlInput.type = 'text';
+  imageUrlInput.placeholder = 'URL da imagem do produto...';
+
+  // Cria o input para o preço do produto
+  const priceInput = document.createElement('input');
+  priceInput.className = 'input-modal';
+  priceInput.id = 'priceInput';
+  priceInput.type = 'number';
+  priceInput.placeholder = 'Preço do produto...';
+
+  // Cria o input para a categoria do produto
+  const categoryInput = document.createElement('input');
+  categoryInput.className = 'input-modal';
+  categoryInput.id = 'categoryInput';
+  categoryInput.type = 'text';
+  categoryInput.placeholder = 'Categoria do produto...';
+
+  // Cria o botão de adicionar
+  const addButton = document.createElement('input');
+  addButton.id = 'addButton';
+  addButton.className = 'input-modal';
+  addButton.type = 'button';
+  addButton.value = 'Adicionar';
+  addButton.onclick = addProduct; // Função para adicionar o produto
+
+  // Adiciona os inputs ao div de inputs
+  modalInputs.appendChild(nameInput);
+  modalInputs.appendChild(descriptionInput);
+  modalInputs.appendChild(imageUrlInput);
+  modalInputs.appendChild(priceInput);
+  modalInputs.appendChild(categoryInput);
+  modalInputs.appendChild(addButton);
+
+  // Adiciona o botão de fechar e os inputs ao conteúdo do modal
+  modalContent.appendChild(closeSpan);
+  modalContent.appendChild(modalInputs);
+
+  // Adiciona o conteúdo ao modal
+  modal.appendChild(modalContent);
+
+  // Adiciona o modal ao corpo do documento
+  document.body.appendChild(modal);
+
+  // Exibe o modal
+  modal.style.display = 'block';
+}
+
+// Função para fechar o modal
+function fechar() {
+  const modal = document.getElementById('modal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Função para adicionar o produto (a ser implementada)
+function addProduct() {
+  const name = document.getElementById('nameInput').value;
+  const description = document.getElementById('descriptionInput').value;
+  const imageUrl = document.getElementById('imageUrlInput').value;
+  const price = document.getElementById('priceInput').value;
+  const category = document.getElementById('categoryInput').value;
+
+  // Aqui você pode adicionar a lógica para salvar o produto
+  console.log('Produto adicionado:', { name, description, imageUrl, price, category });
+
+  // Fecha o modal após adicionar o produto
+  fechar();
 }
 
 function editarProdutoModal(){
@@ -30,16 +144,17 @@ function editarProdutoModal(){
 function deleteProductModal() {
   let modal = document.getElementById('modal');
 
-  // Se o modal já existir, apenas o exibe
-  if (modal) {
-    modal.style.display = 'block';
-    return;
-  }
 
-  // Cria o elemento div para o modal
-  modal = document.createElement('div');
-  modal.id = 'modal';
-  modal.className = 'modal';
+  // Se o modal já existir, remove o conteúdo antigo
+  if (modal) {
+    modal.innerHTML = ''; // Limpa o conteúdo do modal
+  } else {
+    // Cria o elemento div para o modal
+    modal = document.createElement('div');
+    modal.id = 'modal';
+    modal.className = 'modal';
+    document.body.appendChild(modal);
+  }
 
   // Cria o elemento div para o conteúdo do modal
   const modalContent = document.createElement('div');
