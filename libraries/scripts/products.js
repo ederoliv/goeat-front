@@ -209,11 +209,34 @@ function deleteProductModal() {
 
 async function listProducts(url) { 
 
+    const table = document.querySelector('table');
+
+    const thead = document.createElement('thead');
+
+    const tr = document.createElement('tr');
+
+    const thId = document.createElement('th');
+    const thName = document.createElement('th');
+    const thDescription = document.createElement('th');
+    const thPrice = document.createElement('th');
+    const thImage = document.createElement('th');
+
+    thId.textContent = "ID";
+    thName.textContent = "Nome";
+    thDescription.textContent = "Descrição";
+    thPrice.textContent = "Preço"
+    thImage.textContent = "Imagem";
+
+    thead.append(thId, thName, thDescription, thPrice, thImage);
+
+    table.appendChild(thead);
+
     const tbody = document.querySelector('#tbody');
 
     const response = await fetch(url);
 
     const data = await response.json();
+
 
     data.map((post) => {
 
