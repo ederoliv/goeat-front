@@ -48,6 +48,11 @@ function addProductModal() {
   const modalInputs = document.createElement('div');
   modalInputs.className = 'modal-inputs';
 
+  const titleAddProduct = document.createElement('h2');
+  titleAddProduct.id = 'title-add-product';
+  titleAddProduct.textContent = "Cadastrar produto";
+
+
   // Cria o input para o nome do produto
   const nameInput = document.createElement('input');
   nameInput.className = 'input-modal';
@@ -92,6 +97,7 @@ function addProductModal() {
   addButton.onclick = addProduct; // Função para adicionar o produto
 
   // Adiciona os inputs ao div de inputs
+  modalInputs.appendChild(titleAddProduct);
   modalInputs.appendChild(nameInput);
   modalInputs.appendChild(descriptionInput);
   modalInputs.appendChild(imageUrlInput);
@@ -220,14 +226,19 @@ async function listProducts(url) {
     const thDescription = document.createElement('th');
     const thPrice = document.createElement('th');
     const thImage = document.createElement('th');
+    const thEdit = document.createElement('th');
+    const thDelete = document.createElement('th');
 
     thId.textContent = "ID";
     thName.textContent = "Nome";
     thDescription.textContent = "Descrição";
     thPrice.textContent = "Preço"
     thImage.textContent = "Imagem";
+    thEdit.textContent = "Editar";
+    thDelete.textContent = "Excluir";
 
-    thead.append(thId, thName, thDescription, thPrice, thImage);
+
+    thead.append(thId, thName, thDescription, thPrice, thImage, thEdit, thDelete);
 
     table.appendChild(thead);
 
@@ -248,13 +259,17 @@ async function listProducts(url) {
         const description = document.createElement('th');
         const price = document.createElement('th');
         const imageUrl = document.createElement('th');
+        const editButton = document.createElement('th');
+        const deleteButton = document.createElement('th');
 
-
-        id.innerText = post.id;
+        id.innerText = post.id.slice(0,3);
         name.innerText = post.name;
         description.innerText = post.description;
         price.innerText = post.price;
         imageUrl.innerText = post.imageUrl;
+        editButton.className = "list-product-edit-button fa fa-pencil-square-o";
+        deleteButton.className = "list-product-delete-button fa fa-trash";
+      
 
 
         tr.appendChild(id);
@@ -262,6 +277,8 @@ async function listProducts(url) {
         tr.appendChild(description);
         tr.appendChild(price)
         tr.appendChild(imageUrl);
+        tr.appendChild(editButton);
+        tr.appendChild(deleteButton);
 
         tbody.appendChild(tr);
         
