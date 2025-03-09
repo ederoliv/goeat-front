@@ -15,7 +15,8 @@ table {
   }
   
   thead {
-    background-color: #06CF90;
+    background-color: var(--goeat-primary);
+    color: var(--goeat-secondary);
   }
   
   thead tr:first-child th:first-child {
