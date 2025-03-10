@@ -1,7 +1,7 @@
 const userDataString = sessionStorage.getItem('userData');
 const userData = JSON.parse(userDataString);
-var defaultProductsUrl = 'http://localhost:8080/api/v1/products/';
-var urlWithUserId = `http://localhost:8080/api/v1/products/${userData.partnerId}`;
+var defaultProductsUrl = `${routes.api}products/`;
+var urlWithUserId = `${defaultProductsUrl}${userData.partnerId}`;
 
 
 window.onload = function() {
@@ -10,8 +10,6 @@ if (userDataString) {
     const userData = JSON.parse(userDataString);
   
     document.getElementById('userName').textContent = userData.name;
-
-    var urlWithUserId = `http://localhost:8080/api/v1/products/${userData.partnerId}`;
     
     listProducts(urlWithUserId);
 }

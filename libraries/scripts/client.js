@@ -33,7 +33,7 @@ function criarCardParceiro(parceiro) {
 
     const container = document.querySelector('#container');
 
-    const response = await fetch('http://localhost:8080/api/v1/partners');
+    const response = await fetch('https://goeat-api.ederoliv.com.br/api/v1/partners');
 
     const data = await response.json();
 
