@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-/* Overlay */
+
 .overlay {
   position: fixed;
   top: 0;
@@ -17,7 +17,6 @@
   z-index: 1000;
 }
 
-/* Modal */
 .modal {
   width: 600px;
   max-width: 90%;

@@ -6,7 +6,7 @@ function login() {
   const password = passwordInput.value;
 
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost:8080/api/v1/partners/login', true);
+  xhr.open('POST', `${API_BASE_URL}partners/login`, true);
   xhr.setRequestHeader('Content-Type', 'application/json');
 
   const credentials = {

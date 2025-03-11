@@ -9,9 +9,6 @@ routes = {
 
     //ASSETS
     assets : '/libraries/assets/',
-
-    //API
-    api : 'http://goeat-api.ederoliv.com.br/api/v1/'
     
 }
 

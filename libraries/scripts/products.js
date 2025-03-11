@@ -1,123 +1,99 @@
 const userDataString = sessionStorage.getItem('userData');
 const userData = JSON.parse(userDataString);
-var defaultProductsUrl = `${routes.api}products/`;
-var urlWithUserId = `${defaultProductsUrl}${userData.partnerId}`;
+const defaultProductsUrl = `https://goeat-api.ederoliv.com.br/api/v1/products/`;
+const urlWithUserId = `${defaultProductsUrl}${userData.partnerId}`;
 
-
-window.onload = function() {
-  const userDataString = sessionStorage.getItem('userData');
-if (userDataString) {
-    const userData = JSON.parse(userDataString);
-  
+window.onload = function () {
+  if (userDataString) {
     document.getElementById('userName').textContent = userData.name;
-    
     listProducts(urlWithUserId);
-}
+  }
 };
 
-
-function addProductModal() {
-  let modal = document.getElementById('modal');
-
-
-  // Se o modal já existir, remove o conteúdo antigo
-  if (modal) {
-    modal.innerHTML = ''; // Limpa o conteúdo do modal
-  } else {
-    // Cria o elemento div para o modal
-    modal = document.createElement('div');
-    modal.id = 'modal';
-    modal.className = 'modal';
+function _addProductModal() {
+  let modal = document.getElementById("modal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "modal";
+    modal.className = "modal";
     document.body.appendChild(modal);
+  } else {
+    modal.innerHTML = ""; // Limpa o conteúdo existente
   }
 
-  // Cria o elemento div para o conteúdo do modal
-  const modalContent = document.createElement('div');
-  modalContent.className = 'modal-content';
+  const modalContent = document.createElement("div");
+  modalContent.className = "modal-content";
 
-  // Cria o elemento span para o botão de fechar
-  const closeSpan = document.createElement('span');
-  closeSpan.id = 'close';
-  closeSpan.className = 'close';
-  closeSpan.innerHTML = '&times;';
-  closeSpan.onclick = fechar; // Atribui o evento onclick
+  const modalHeader = document.createElement("div");
+  modalHeader.className = "modal-header";
 
-  // Cria o elemento div para os inputs do modal
-  const modalInputs = document.createElement('div');
-  modalInputs.className = 'modal-inputs';
+  const modalTitle = document.createElement("h2");
+  modalTitle.textContent = "Cadastrar Produto";
 
-  const titleAddProduct = document.createElement('h2');
-  titleAddProduct.id = 'title-add-product';
-  titleAddProduct.textContent = "Cadastrar produto";
+  const closeButton = document.createElement("button");
+  closeButton.className = "close-button fa fa-times";
+  closeButton.onclick = () => (modal.style.display = "none");
 
+  modalHeader.append(modalTitle, closeButton);
 
-  // Cria o input para o nome do produto
-  const nameInput = document.createElement('input');
-  nameInput.className = 'input-modal';
-  nameInput.id = 'nameInput';
-  nameInput.type = 'text';
-  nameInput.placeholder = 'Nome do produto...';
+  const modalBody = document.createElement("div");
+  modalBody.className = "modal-body";
 
-  // Cria o input para a descrição do produto
-  const descriptionInput = document.createElement('input');
-  descriptionInput.className = 'input-modal';
-  descriptionInput.id = 'descriptionInput';
-  descriptionInput.type = 'text';
-  descriptionInput.placeholder = 'Descrição do produto...';
+  // Criação dos inputs diretamente dentro da função
+  const inputs = [
+    { id: "nameInput", type: "text", placeholder: "Nome do produto...", label: "Nome do Produto" },
+    { id: "descriptionInput", type: "text", placeholder: "Descrição do produto...", label: "Descrição" },
+    { id: "priceInput", type: "number", placeholder: "Preço do produto...", label: "Preço" },
+    { id: "imageUrlInput", type: "text", placeholder: "URL da imagem do produto...", label: "URL da Imagem" },
+    { id: "categoryInput", type: "text", placeholder: "Categoria do produto...", label: "Categoria" },
+  ];
 
-  // Cria o input para a URL da imagem do produto
-  const imageUrlInput = document.createElement('input');
-  imageUrlInput.className = 'input-modal';
-  imageUrlInput.id = 'imageUrlInput';
-  imageUrlInput.type = 'text';
-  imageUrlInput.placeholder = 'URL da imagem do produto...';
+  inputs.forEach(input => {
+    const label = document.createElement("label");
+    label.textContent = input.label;
+    label.setAttribute("for", input.id);
 
-  // Cria o input para o preço do produto
-  const priceInput = document.createElement('input');
-  priceInput.className = 'input-modal';
-  priceInput.id = 'priceInput';
-  priceInput.type = 'number';
-  priceInput.placeholder = 'Preço do produto...';
+    const inputElement = document.createElement("input");
+    inputElement.id = input.id;
+    inputElement.type = input.type;
+    inputElement.placeholder = input.placeholder;
+    inputElement.className = "input-modal";
 
-  // Cria o input para a categoria do produto
-  const categoryInput = document.createElement('input');
-  categoryInput.className = 'input-modal';
-  categoryInput.id = 'categoryInput';
-  categoryInput.type = 'text';
-  categoryInput.placeholder = 'Categoria do produto...';
+    modalBody.append(label, inputElement);
+  });
 
-  // Cria o botão de adicionar
-  const addButton = document.createElement('input');
-  addButton.id = 'addButton';
-  addButton.className = 'input-modal';
-  addButton.type = 'button';
-  addButton.value = 'Adicionar';
-  addButton.onclick = addProduct; // Função para adicionar o produto
+  const modalFooter = document.createElement("div");
+  modalFooter.className = "modal-footer";
 
-  // Adiciona os inputs ao div de inputs
-  modalInputs.appendChild(titleAddProduct);
-  modalInputs.appendChild(nameInput);
-  modalInputs.appendChild(descriptionInput);
-  modalInputs.appendChild(imageUrlInput);
-  modalInputs.appendChild(priceInput);
-  modalInputs.appendChild(categoryInput);
-  modalInputs.appendChild(addButton);
+  const cancelButton = document.createElement("button");
+  cancelButton.className = "cancel-button";
+  cancelButton.textContent = "Cancelar";
+  cancelButton.onclick = () => (modal.style.display = "none");
 
-  // Adiciona o botão de fechar e os inputs ao conteúdo do modal
-  modalContent.appendChild(closeSpan);
-  modalContent.appendChild(modalInputs);
+  const saveButton = document.createElement("button");
+  saveButton.className = "save-button";
+  saveButton.textContent = "Salvar";
+  saveButton.onclick = addProduct;
 
-  // Adiciona o conteúdo ao modal
+  modalFooter.append(cancelButton, saveButton);
+  modalContent.append(modalHeader, modalBody, modalFooter);
   modal.appendChild(modalContent);
-
-  // Adiciona o modal ao corpo do documento
   document.body.appendChild(modal);
-
-  // Exibe o modal
-  modal.style.display = 'block';
+  modal.style.display = "flex";
 }
 
-// Função para fechar o modal
+function addProduct() {
+  const name = document.getElementById("nameInput").value;
+  const description = document.getElementById("descriptionInput").value;
+  const price = document.getElementById("priceInput").value;
+  const imageUrl = document.getElementById("imageUrlInput").value;
+  const category = document.getElementById("categoryInput").value;
+
+  console.log("Produto adicionado:", { name, description, price, imageUrl, category });
+  alert("Produto adicionado com sucesso!");
+  fechar();
+}
+
 function fechar() {
   const modal = document.getElementById('modal');
   if (modal) {
@@ -125,64 +101,35 @@ function fechar() {
   }
 }
 
-// Função para adicionar o produto (a ser implementada)
-function addProduct() {
-  const name = document.getElementById('nameInput').value;
-  const description = document.getElementById('descriptionInput').value;
-  const imageUrl = document.getElementById('imageUrlInput').value;
-  const price = document.getElementById('priceInput').value;
-  const category = document.getElementById('categoryInput').value;
-
-  // Aqui você pode adicionar a lógica para salvar o produto
-  console.log('Produto adicionado:', { name, description, imageUrl, price, category });
-
-  // Fecha o modal após adicionar o produto
-  fechar();
-}
-
-function editarProdutoModal(){
-  alert("editarProdutoModal");
-}
-
-
 function deleteProductModal() {
   let modal = document.getElementById('modal');
-
-
-  // Se o modal já existir, remove o conteúdo antigo
-  if (modal) {
-    modal.innerHTML = ''; // Limpa o conteúdo do modal
-  } else {
-    // Cria o elemento div para o modal
+  if (!modal) {
     modal = document.createElement('div');
     modal.id = 'modal';
     modal.className = 'modal';
     document.body.appendChild(modal);
+  } else {
+    modal.innerHTML = '';
   }
 
-  // Cria o elemento div para o conteúdo do modal
   const modalContent = document.createElement('div');
   modalContent.className = 'modal-content';
 
-  // Cria o elemento span para o botão de fechar
   const closeSpan = document.createElement('span');
   closeSpan.id = 'close';
   closeSpan.className = 'close';
   closeSpan.innerHTML = '&times;';
-  closeSpan.onclick = fechar; // Atribui o evento onclick
+  closeSpan.onclick = fechar;
 
-  // Cria o elemento div para os inputs do modal
   const modalInputs = document.createElement('div');
   modalInputs.className = 'modal-inputs';
 
-  // Cria o input para o código do produto
   const codeInput = document.createElement('input');
   codeInput.className = 'input-modal';
   codeInput.id = 'codeInput';
   codeInput.type = 'text';
   codeInput.placeholder = 'Digite o código do produto...';
 
-  // Cria o botão de excluir
   const deleteButton = document.createElement('input');
   deleteButton.id = 'deleteButton';
   deleteButton.className = 'input-modal';
@@ -190,155 +137,93 @@ function deleteProductModal() {
   deleteButton.value = 'Excluir';
   deleteButton.onclick = deleteProducts;
 
-  // Adiciona os inputs ao div de inputs
-  modalInputs.appendChild(codeInput);
-  modalInputs.appendChild(deleteButton);
-
-  // Adiciona o botão de fechar e os inputs ao conteúdo do modal
-  modalContent.appendChild(closeSpan);
-  modalContent.appendChild(modalInputs);
-
-  // Adiciona o conteúdo ao modal
+  modalInputs.append(codeInput, deleteButton);
+  modalContent.append(closeSpan, modalInputs);
   modal.appendChild(modalContent);
-
-  // Adiciona o modal ao corpo do documento
   document.body.appendChild(modal);
-
-  // Exibe o modal
   modal.style.display = 'block';
 }
 
+async function listProducts(url) {
+  const table = document.querySelector('table');
+  const thead = document.createElement('thead');
+  const tr = document.createElement('tr');
 
-// busca produtos
+  const headers = ["ID", "Nome", "Descrição", "Preço", "Imagem", "Editar", "Excluir"];
+  headers.forEach(headerText => {
+    const th = document.createElement('th');
+    th.textContent = headerText;
+    tr.appendChild(th);
+  });
 
-async function listProducts(url) { 
+  thead.appendChild(tr);
+  table.appendChild(thead);
 
-    const table = document.querySelector('table');
+  const tbody = document.querySelector('#tbody');
+  tbody.innerHTML = ''; // Limpa o conteúdo existente
 
-    const thead = document.createElement('thead');
+  const response = await fetch(url);
+  const data = await response.json();
 
+  data.forEach(post => {
     const tr = document.createElement('tr');
 
-    const thId = document.createElement('th');
-    const thName = document.createElement('th');
-    const thDescription = document.createElement('th');
-    const thPrice = document.createElement('th');
-    const thImage = document.createElement('th');
-    const thEdit = document.createElement('th');
-    const thDelete = document.createElement('th');
-
-    thId.textContent = "ID";
-    thName.textContent = "Nome";
-    thDescription.textContent = "Descrição";
-    thPrice.textContent = "Preço"
-    thImage.textContent = "Imagem";
-    thEdit.textContent = "Editar";
-    thDelete.textContent = "Excluir";
-
-
-    thead.append(thId, thName, thDescription, thPrice, thImage, thEdit, thDelete);
-
-    table.appendChild(thead);
-
-    const tbody = document.querySelector('#tbody');
-
-    const response = await fetch(url);
-
-    const data = await response.json();
-
-
-    data.map((post) => {
-
-
-        const tr =  document.createElement('tr');
-
-        const id = document.createElement('th');
-        const name = document.createElement('th');
-        const description = document.createElement('th');
-        const price = document.createElement('th');
-        const imageUrl = document.createElement('th');
-        const editButton = document.createElement('th');
-        const deleteButton = document.createElement('th');
-
-        id.innerText = post.id.slice(0,3);
-        name.innerText = post.name;
-        description.innerText = post.description;
-        price.innerText = post.price;
-        imageUrl.innerText = post.imageUrl;
-        editButton.className = "list-product-edit-button fa fa-pencil-square-o";
-        deleteButton.className = "list-product-delete-button fa fa-trash";
-      
-
-
-        tr.appendChild(id);
-        tr.appendChild(name);
-        tr.appendChild(description);
-        tr.appendChild(price)
-        tr.appendChild(imageUrl);
-        tr.appendChild(editButton);
-        tr.appendChild(deleteButton);
-
-        tbody.appendChild(tr);
-        
+    const fields = [post.id.slice(0, 3), post.name, post.description, post.price, post.imageUrl];
+    fields.forEach(field => {
+      const td = document.createElement('td');
+      td.innerText = field;
+      tr.appendChild(td);
     });
+
+    const editButton = document.createElement('td');
+    const editIcon = document.createElement('i');
+    editIcon.className = "fa fa-pencil-square-o list-product-edit-button";
+    editButton.appendChild(editIcon);
+
+    const deleteButton = document.createElement('td');
+    const deleteIcon = document.createElement('i');
+    deleteIcon.className = "fa fa-trash list-product-delete-button";
+    deleteButton.appendChild(deleteIcon);
+
+    tr.append(editButton, deleteButton);
+    tbody.appendChild(tr);
+  });
 }
 
-async function deleteProducts(){
-
+async function deleteProducts() {
   const codeInput = document.getElementById("codeInput");
+  const url = `${API_BASE_URL}products/${codeInput.value}`;
 
-  const url = `http://localhost:8080/api/v1/products/${codeInput.value}`;
-
-  console.log(url);
-
-  const response = await fetch(url , { 
-    method: 'DELETE'})
-    .then(response => {
-
-      listProducts(`${urlWithUserId}${userData.partnerId}`);
-      console.log(response.status);
-    });
+  const response = await fetch(url, { method: 'DELETE' });
+  if (response.ok) {
+    listProducts(`${urlWithUserId}${userData.partnerId}`);
   }
+}
 
-  
-async function registerProduct(){
-
+async function registerProduct() {
   const name = document.getElementById('nome');
   const description = document.getElementById('descricao');
   const price = document.getElementById('preco');
-  const menuId = userData.partnerId;
 
   const data = {
     name: name.value,
     description: description.value,
     price: price.value,
-    imageUrl: 'link ds imagem',
-    menuId: userData.partnerId
-  }
+    imageUrl: 'link da imagem',
+    menuId: userData.partnerId,
+  };
 
   const response = await fetch(defaultProductsUrl, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json' // Indicando que o corpo da requisição é JSON
-  },
-  body: JSON.stringify(data)
-})
-    .then(response => {
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
 
-      if (response.ok) {
-        alertaSucesso();
-      }
-    });
+  if (response.ok) {
+    alertaSucesso();
+  }
 }
 
-//modal
 function alertaSucesso() {
-document.getElementById("modal").style.display = "block";
+  document.getElementById("modal").style.display = "block";
 }
-
-// Função para fechar o modal
-function fechar() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
-}
-
