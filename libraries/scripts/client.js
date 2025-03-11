@@ -1,76 +1,44 @@
-
 // Chamar a função ao carregar a página
-window.onload = function() {
-
+window.onload = function () {
   listPartners();
+};
 
+// Função para buscar os parceiros e criar os cards
+async function listPartners() {
+  const partnersGrid = document.querySelector('#partners-grid'); // Seleciona o contêiner da grade
+
+  const response = await fetch('https://goeat-api.ederoliv.com.br/api/v1/partners');
+  const data = await response.json();
+
+  data.forEach((partner) => {
+    const card = document.createElement('div');
+    card.className = 'card animate__animated animate__bounceInLeft';
+    const image = document.createElement('img');
+    image.className = 'partner-logo';
+    const name = document.createElement('h4');
+    name.className = 'partner-name';
+
+    card.dataset.partnerId = partner.id;
+
+    card.addEventListener('click', () => {
+      const partnerId = card.dataset.partnerId;
+      window.location.href = `${router(routes.store)}?partnerId=${partnerId}`;
+    });
+
+    name.innerText = partner.name;
+    image.src = `${router(routes.assets)}partner.png`;
+
+    card.appendChild(image);
+    card.appendChild(name);
+
+    partnersGrid.appendChild(card); // Adiciona o card ao contêiner da grade
+  });
 }
 
-// Função para criar um card de parceiro
-function criarCardParceiro(parceiro) {
-    const card = document.createElement('div');
-    card.classList.add('card');
-  
-    const imagem = document.createElement('img');
-    imagem.id = 'partner-logo';
-    imagem.src = 'https://img.freepik.com/vetores-gratis/restaurante-plano-com-postes-de-iluminacao_23-2147539585.jpg';
-  
-    const container = document.createElement('div');
-    container.classList.add('container');
-  
-    const nome = document.createElement('h4');
-    nome.innerHTML = `<b>${parceiro.name}</b>`;
-  
-    container.appendChild(nome);
-    card.appendChild(imagem);
-    card.appendChild(container);
-  
-    return card;
-  }
-  
-  // Função para buscar os parceiros e criar os cards
-  async function listPartners() {
+function w3_open() {
+  document.getElementById('mySidebar').style.display = 'block';
+}
 
-    const container = document.querySelector('#container');
-
-    const response = await fetch('https://goeat-api.ederoliv.com.br/api/v1/partners');
-
-    const data = await response.json();
-
-    data.map((post) => {
-
-        const card = document.createElement('div');
-        card.className = 'card animate__animated animate__bounceInLeft';
-        const image = document.createElement('img');
-        image.className = 'partner-logo';
-        const name = document.createElement('h4');
-        name.className = 'partner-name';
-
-
-        card.dataset.partnerId = post.id;
-        
-
-        card.addEventListener('click', () => {
-          const partnerId = card.dataset.partnerId;
-          window.location.href = `${router(routes.store)}?partnerId=${partnerId}`;
-        });
-
-        name.innerText = post.name;
-        image.src = `${router(routes.assets)}partner.png`;
-
-        card.appendChild(image);
-        card.appendChild(name);
-
-        container.appendChild(card);
-
-    });
-  }
-    
-
-  function w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-  }
-   
-  function w3_close() {
-    document.getElementById("mySidebar").style.display = "none";
-  }
+function w3_close() {
+  document.getElementById('mySidebar').style.display = 'none';
+}
