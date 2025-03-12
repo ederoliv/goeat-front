@@ -5,13 +5,10 @@ let API_BASE_URL = 'http://localhost:8080/api/v1'; // Valor default para ambient
 // Se não for o ambiente local (localhost ou 127.0.0.1), usa o valor da variável de ambiente
 if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
     API_BASE_URL = 'https://goeat-api.ederoliv.com.br/api/v1'; // Para Vercel
-    alert('Ambiente de produção');
 }
 
 // Tornando a variável API_BASE_URL acessível globalmente
 window.API_BASE_URL = API_BASE_URL;
-
-
 
 
 //rotas (Ah VÁ?)
@@ -26,8 +23,6 @@ routes = {
     assets : '/libraries/assets/',
     
 }
-
-//const API_BASE_URL = process.env.API_PROD_URL || 'http://localhost:8080/api/v1';
 
 
 function router(routes) {

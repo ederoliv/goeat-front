@@ -20,7 +20,7 @@ function getPartnerId() {
 async function loadPartnerData(partnerId) {
 
     try {
-        const response = await fetch(`${API_BASE_URL}partners/${partnerId}`);
+        const response = await fetch(`${API_BASE_URL}/partners/${partnerId}`);
         
         if (!response.ok) {
             throw new Error('Erro na requisição');
@@ -44,7 +44,7 @@ async function listPartnerProducts(partnerId) {
 
     try {
 
-        const response = await fetch(`${API_BASE_URL}partners/${partnerId}/products`);
+        const response = await fetch(`${API_BASE_URL}/partners/${partnerId}/products`);
 
         const data = await response.json();
 
