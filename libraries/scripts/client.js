@@ -1,6 +1,5 @@
 // Chamar a função ao carregar a página
 window.onload = function () {
-  alert(API_BASE_URL);
   listPartners();
 };
 
@@ -8,7 +7,7 @@ window.onload = function () {
 async function listPartners() {
   const partnersGrid = document.querySelector('#partners-grid'); // Seleciona o contêiner da grade
 
-  const response = await fetch('https://goeat-api.ederoliv.com.br/api/v1/partners');
+  const response = await fetch(`${API_BASE_URL}/partners`);
   const data = await response.json();
 
   data.forEach((partner) => {

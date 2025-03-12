@@ -1,13 +1,16 @@
 const root = window.location.origin;
 
-let API_BASE_URL;
-if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
-    API_BASE_URL = 'http://localhost:8080/api/v1';
-    console.log("Tá local") // Local
-} else {
-    API_BASE_URL = process.env.API_PROD_URL || 'https://goeat-api.ederoliv.com.br/api/v1'; // Vercel
-    console.log("Tá na nuvem")
+let API_BASE_URL = 'http://localhost:8080/api/v1'; // Valor default para ambiente local
+
+// Se não for o ambiente local (localhost ou 127.0.0.1), usa o valor da variável de ambiente
+if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    API_BASE_URL = process.env.API_PROD_URL || 'https://goeat-api.ederoliv.com.br/api/v1'; // Para Vercel
+    console.log("Tá na nuvem");
 }
+
+// Tornando a variável API_BASE_URL acessível globalmente
+window.API_BASE_URL = API_BASE_URL;
+
 
 
 
