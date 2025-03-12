@@ -1,5 +1,6 @@
 // Chamar a função ao carregar a página
 window.onload = function () {
+  alert(API_BASE_URL);
   listPartners();
 };
 
