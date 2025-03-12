@@ -4,8 +4,8 @@ let API_BASE_URL = 'http://localhost:8080/api/v1'; // Valor default para ambient
 
 // Se não for o ambiente local (localhost ou 127.0.0.1), usa o valor da variável de ambiente
 if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    API_BASE_URL = process.env.API_PROD_URL || 'https://goeat-api.ederoliv.com.br/api/v1'; // Para Vercel
-    console.log("Tá na nuvem");
+    API_BASE_URL = 'https://goeat-api.ederoliv.com.br/api/v1'; // Para Vercel
+    alert('Ambiente de produção');
 }
 
 // Tornando a variável API_BASE_URL acessível globalmente
