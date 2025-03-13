@@ -158,7 +158,6 @@ async function listProducts() {
 
 
 async function deleteProduct(productId) {
-    alert(`${productId} + "  " + ${API_BASE_URL}`);
 
     const response = await fetch(`${API_BASE_URL}/products/${productId}`, { method: 'DELETE' });
   if (response.ok) {
