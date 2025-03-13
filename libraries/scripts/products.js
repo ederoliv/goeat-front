@@ -6,7 +6,7 @@ const urlWithUserId = `${defaultProductsUrl}${userData.partnerId}`;
 window.onload = function () {
   if (userDataString) {
     document.getElementById('userName').textContent = userData.name;
-    listProducts(urlWithUserId);
+    listProducts();
   }
 };
 
@@ -101,51 +101,15 @@ function fechar() {
   }
 }
 
-function deleteProductModal() {
-  let modal = document.getElementById('modal');
-  if (!modal) {
-    modal = document.createElement('div');
-    modal.id = 'modal';
-    modal.className = 'modal';
-    document.body.appendChild(modal);
-  } else {
-    modal.innerHTML = '';
+async function listProducts() {
+  const table = document.querySelector('table');
+
+  // Remover thead existente para evitar duplicação
+  const existingThead = table.querySelector('thead');
+  if (existingThead) {
+    table.removeChild(existingThead);
   }
 
-  const modalContent = document.createElement('div');
-  modalContent.className = 'modal-content';
-
-  const closeSpan = document.createElement('span');
-  closeSpan.id = 'close';
-  closeSpan.className = 'close';
-  closeSpan.innerHTML = '&times;';
-  closeSpan.onclick = fechar;
-
-  const modalInputs = document.createElement('div');
-  modalInputs.className = 'modal-inputs';
-
-  const codeInput = document.createElement('input');
-  codeInput.className = 'input-modal';
-  codeInput.id = 'codeInput';
-  codeInput.type = 'text';
-  codeInput.placeholder = 'Digite o código do produto...';
-
-  const deleteButton = document.createElement('input');
-  deleteButton.id = 'deleteButton';
-  deleteButton.className = 'input-modal';
-  deleteButton.type = 'button';
-  deleteButton.value = 'Excluir';
-  deleteButton.onclick = deleteProducts;
-
-  modalInputs.append(codeInput, deleteButton);
-  modalContent.append(closeSpan, modalInputs);
-  modal.appendChild(modalContent);
-  document.body.appendChild(modal);
-  modal.style.display = 'block';
-}
-
-async function listProducts(url) {
-  const table = document.querySelector('table');
   const thead = document.createElement('thead');
   const tr = document.createElement('tr');
 
@@ -162,7 +126,7 @@ async function listProducts(url) {
   const tbody = document.querySelector('#tbody');
   tbody.innerHTML = ''; // Limpa o conteúdo existente
 
-  const response = await fetch(url);
+  const response = await fetch(urlWithUserId);
   const data = await response.json();
 
   data.forEach(post => {
@@ -179,24 +143,26 @@ async function listProducts(url) {
     const editIcon = document.createElement('i');
     editIcon.className = "fa fa-pencil-square-o list-product-edit-button";
     editButton.appendChild(editIcon);
+    editButton.addEventListener('click', () => alert("editando"));
 
     const deleteButton = document.createElement('td');
     const deleteIcon = document.createElement('i');
     deleteIcon.className = "fa fa-trash list-product-delete-button";
     deleteButton.appendChild(deleteIcon);
+    deleteButton.addEventListener('click', () => deleteProduct(post.id));
 
     tr.append(editButton, deleteButton);
     tbody.appendChild(tr);
   });
 }
 
-async function deleteProducts() {
-  const codeInput = document.getElementById("codeInput");
-  const url = `${API_BASE_URL}products/${codeInput.value}`;
 
-  const response = await fetch(url, { method: 'DELETE' });
+async function deleteProduct(productId) {
+    alert(`${productId} + "  " + ${API_BASE_URL}`);
+
+    const response = await fetch(`${API_BASE_URL}/products/${productId}`, { method: 'DELETE' });
   if (response.ok) {
-    listProducts(`${urlWithUserId}${userData.partnerId}`);
+    listProducts();
   }
 }
 
