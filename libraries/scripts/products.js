@@ -114,7 +114,7 @@ function _addProductModal() {
 
 // Função para carregar categorias no dropdown
 function loadCategories(categorySelect) {
-  fetch(`${API_BASE_URL}/categories/${userData.partnerId}`, {
+  fetch(`${API_BASE_URL}/menus/${userData.partnerId}/categories`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -277,7 +277,7 @@ function loadCategoryList(container) {
   container.appendChild(table)
 
   // Buscar categorias da API
-  fetch(`${API_BASE_URL}/categories/${userData.partnerId}`, {
+  fetch(`${API_BASE_URL}/menus/${userData.partnerId}/categories`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -337,7 +337,7 @@ function loadCategoryList(container) {
 
 // Função para adicionar uma nova categoria
 function addCategory(name, callback) {
-  fetch(`${API_BASE_URL}/categories`, {
+  fetch(`${API_BASE_URL}/menus/${userData.partnerId}/categories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -367,7 +367,7 @@ function addCategory(name, callback) {
 function editCategory(id, currentName, callback) {
   const newName = prompt("Digite o novo nome da categoria:", currentName)
   if (newName && newName !== currentName) {
-    fetch(`${API_BASE_URL}/categories/${id}`, {
+    fetch(`${API_BASE_URL}/menus/${userData.partnerId}/categories/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -396,11 +396,11 @@ function editCategory(id, currentName, callback) {
 // Função para excluir uma categoria
 function deleteCategory(id, callback) {
   if (confirm("Tem certeza que deseja excluir esta categoria?")) {
-    fetch(`${API_BASE_URL}/categories/${id}`, {
+    fetch(`${API_BASE_URL}/menus/${userData.partnerId}/categories/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
-        if (!response.ok) {
+        if (response.status !== 204) {
           throw new Error("Falha ao excluir categoria")
         }
         return response.json()
