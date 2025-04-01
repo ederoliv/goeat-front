@@ -413,27 +413,46 @@ function deleteCategory(id, callback) {
   }
 }
 
-
 function addProduct() {
   const name = document.getElementById("nameInput").value
   const description = document.getElementById("descriptionInput").value
-  const price = document.getElementById("priceInput").value
+  const price = parseFloat(document.getElementById("priceInput").value) || 0
   const imageUrl = document.getElementById("imageUrlInput").value
-  const categorySelect = document.getElementById("categoryInput")
-  const categoryId = categorySelect.value
-  const categoryName = categorySelect.options[categorySelect.selectedIndex].text
 
-  console.log("Produto adicionado:", {
+  if (!name || price <= 0) {
+    alert("Por favor, preencha os campos obrigatórios corretamente.")
+    return
+  }
+
+  const productData = {
     name,
     description,
     price,
     imageUrl,
-    categoryId,
-    categoryName,
+    menuId: userData.partnerId,
+  }
+
+  fetch(`${API_BASE_URL}/products`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(productData),
   })
-  alert("Produto adicionado com sucesso!")
-  fechar()
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        alert("Produto adicionado com sucesso!")
+        document.getElementById("modal").style.display = "none"
+        return response.json()
+      }
+      throw new Error("Falha ao adicionar produto")
+    })
+    .catch((error) => {
+      console.error("Erro ao adicionar produto:", error)
+      alert("Erro ao adicionar produto. Tente novamente.")
+    })
 }
+
 
 function fechar() {
   const modal = document.getElementById("modal")
@@ -489,7 +508,6 @@ async function listProducts() {
 
     data.forEach((product) => {
       const tr = document.createElement("tr")
-
       // Incluímos product.categoryName nos campos a serem exibidos
       const fields = [
         product.id.slice(0, 3), 
