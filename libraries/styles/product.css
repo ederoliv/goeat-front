@@ -283,6 +283,7 @@ main {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
+  border-radius: 10px;
 }
 
 .category-table th, .category-table td {
@@ -291,9 +292,6 @@ main {
   border-bottom: 1px solid #ddd;
 }
 
-.category-table th {
-  background-color: #f2f2f2;
-}
 
 .add-category-form {
   margin-bottom: 20px;
@@ -302,6 +300,25 @@ main {
 }
 
 .add-category-form button {
+  background: #06cf90; /* Mesmo fundo do botão Salvar */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
   margin-top: 10px;
   align-self: flex-start;
 }
+
+.add-category-form button:hover {
+  background: #05b17f;
+}
+
+.category-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o input e o botão */
+}
+

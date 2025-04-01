@@ -41,9 +41,9 @@ function _addProductModal() {
 
   // Criação dos inputs diretamente dentro da função
   const inputs = [
-    { id: "nameInput", type: "text", placeholder: "Nome do produto...", label: "Nome do Produto" },
+    { id: "nameInput", type: "text", placeholder: "Nome do produto...", label: "Nome do Produto*" },
     { id: "descriptionInput", type: "text", placeholder: "Descrição do produto...", label: "Descrição" },
-    { id: "priceInput", type: "number", placeholder: "Preço do produto...", label: "Preço" },
+    { id: "priceInput", type: "number", placeholder: "Preço do produto...", label: "Preço*" },
     { id: "imageUrlInput", type: "text", placeholder: "URL da imagem do produto...", label: "URL da Imagem" },
   ]
 
@@ -63,7 +63,7 @@ function _addProductModal() {
 
   // Adicionar o campo de categoria como um combobox
   const categoryLabel = document.createElement("label")
-  categoryLabel.textContent = "Categoria"
+  categoryLabel.textContent = "Categoria*"
   categoryLabel.setAttribute("for", "categoryInput")
 
   const categorySelect = document.createElement("select")
@@ -348,20 +348,19 @@ function addCategory(name, callback) {
     }),
   })
     .then((response) => {
-      if (!response.ok) {
-        throw new Error("Falha ao adicionar categoria")
+      if (response.status === 201) {
+        alert("Categoria adicionada com sucesso!")
+        if (callback) callback()
+        return
       }
-      return response.json()
-    })
-    .then(() => {
-      alert("Categoria adicionada com sucesso!")
-      if (callback) callback()
+      throw new Error("Falha ao adicionar categoria")
     })
     .catch((error) => {
       console.error("Erro ao adicionar categoria:", error)
       alert("Erro ao adicionar categoria. Tente novamente.")
     })
 }
+
 
 // Função para editar uma categoria existente
 function editCategory(id, currentName, callback) {
@@ -400,14 +399,12 @@ function deleteCategory(id, callback) {
       method: "DELETE",
     })
       .then((response) => {
-        if (response.status !== 204) {
-          throw new Error("Falha ao excluir categoria")
+        if (response.status === 204) {
+          alert("Categoria excluída com sucesso!")
+          if (callback) callback()
+          return
         }
-        return response.json()
-      })
-      .then(() => {
-        alert("Categoria excluída com sucesso!")
-        if (callback) callback()
+        throw new Error("Falha ao excluir categoria")
       })
       .catch((error) => {
         console.error("Erro ao excluir categoria:", error)
@@ -415,6 +412,7 @@ function deleteCategory(id, callback) {
       })
   }
 }
+
 
 function addProduct() {
   const name = document.getElementById("nameInput").value
