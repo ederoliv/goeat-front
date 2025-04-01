@@ -190,6 +190,22 @@ body {
   color: #fff;
 }
 
+.modal-content select {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.modal-content select:focus {
+  outline: none;
+  border-color: #007bff;
+  background: #fff;
+}
+
 main {
   background: #f3f4f6;
   grid-area: main;
@@ -248,4 +264,44 @@ main {
 .list-product-delete-button {
   text-align: center;
   background-color: var(--goeat-red);
+}
+
+/*  MODAL CATEGORY  */
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.icon-button:hover {
+  color: #0056b3;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.category-table th, .category-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.category-table th {
+  background-color: #f2f2f2;
+}
+
+.add-category-form {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-category-form button {
+  margin-top: 10px;
+  align-self: flex-start;
 }
