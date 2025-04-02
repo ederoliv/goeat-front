@@ -554,6 +554,7 @@ function fechar() {
   }
 }
 
+// Função para listar os produtos - sem exibir a coluna ID
 async function listProducts() {
   const table = document.querySelector("table")
 
@@ -566,8 +567,8 @@ async function listProducts() {
   const thead = document.createElement("thead")
   const tr = document.createElement("tr")
 
-  // Adicionamos "Categoria" aos cabeçalhos
-  const headers = ["ID", "Nome", "Descrição", "Preço", "Imagem", "Categoria", "Editar", "Excluir"]
+  // Removida a coluna "ID" dos cabeçalhos
+  const headers = ["Nome", "Descrição", "Preço", "Imagem", "Categoria", "Editar", "Excluir"]
   headers.forEach((headerText) => {
     const th = document.createElement("th")
     th.textContent = headerText
@@ -601,9 +602,8 @@ async function listProducts() {
 
     data.forEach((product) => {
       const tr = document.createElement("tr")
-      // Incluímos product.categoryName nos campos a serem exibidos
+      // Removido o ID do array de campos a serem exibidos
       const fields = [
-        product.id.slice(0, 8), 
         product.name, 
         product.description, 
         `R$ ${(product.price / 100).toFixed(2)}`, 
