@@ -587,3 +587,215 @@ async function registerProduct() {
 function alertaSucesso() {
   document.getElementById("modal").style.display = "block"
 }
+
+// Função para editar um produto existente
+function editProduct(product) {
+  // Criar o modal de edição
+  let modal = document.getElementById("modal")
+  if (!modal) {
+    modal = document.createElement("div")
+    modal.id = "modal"
+    modal.className = "modal"
+    document.body.appendChild(modal)
+  } else {
+    modal.innerHTML = "" // Limpa o conteúdo existente
+  }
+
+  const modalContent = document.createElement("div")
+  modalContent.className = "modal-content"
+
+  const modalHeader = document.createElement("div")
+  modalHeader.className = "modal-header"
+
+  const modalTitle = document.createElement("h2")
+  modalTitle.textContent = "Editar Produto"
+
+  const closeButton = document.createElement("button")
+  closeButton.className = "close-button fa fa-times"
+  closeButton.onclick = () => (modal.style.display = "none")
+
+  modalHeader.append(modalTitle, closeButton)
+
+  const modalBody = document.createElement("div")
+  modalBody.className = "modal-body"
+
+  // Criação dos inputs com os valores do produto a ser editado
+  const inputs = [
+    { id: "nameInput", type: "text", placeholder: "Nome do produto...", label: "Nome do Produto*", value: product.name || "" },
+    { id: "descriptionInput", type: "text", placeholder: "Descrição do produto...", label: "Descrição", value: product.description || "" },
+    { id: "priceInput", type: "number", placeholder: "Preço do produto...", label: "Preço*", value: product.price || "" },
+    { id: "imageUrlInput", type: "text", placeholder: "URL da imagem do produto...", label: "URL da Imagem", value: product.imageUrl || "" },
+  ]
+
+  inputs.forEach((input) => {
+    const label = document.createElement("label")
+    label.textContent = input.label
+    label.setAttribute("for", input.id)
+
+    const inputElement = document.createElement("input")
+    inputElement.id = input.id
+    inputElement.type = input.type
+    inputElement.placeholder = input.placeholder
+    inputElement.className = "input-modal"
+    inputElement.value = input.value
+
+    modalBody.append(label, inputElement)
+  })
+
+  // Adicionar o campo de categoria como um combobox
+  const categoryLabel = document.createElement("label")
+  categoryLabel.textContent = "Categoria*"
+  categoryLabel.setAttribute("for", "categoryInput")
+
+  const categorySelect = document.createElement("select")
+  categorySelect.id = "categoryInput"
+  categorySelect.className = "input-modal"
+
+  // Adicionar evento de change para detectar quando "Adicionar categoria" é selecionado
+  categorySelect.addEventListener("change", function () {
+    if (this.value === "add_new_category") {
+      // Resetar a seleção para a opção padrão
+      this.selectedIndex = 0
+      // Abrir o modal de gerenciamento de categorias
+      openCategoryManagementModal()
+    }
+  })
+
+  // Adicionar uma opção de carregamento inicial
+  const loadingOption = document.createElement("option")
+  loadingOption.textContent = "Carregando categorias..."
+  loadingOption.disabled = true
+  loadingOption.selected = true
+  categorySelect.appendChild(loadingOption)
+
+  modalBody.append(categoryLabel, categorySelect)
+
+  // Carregar categorias no dropdown e pré-selecionar a categoria atual do produto
+  loadCategoriesForEdit(categorySelect, product.categoryId)
+
+  const modalFooter = document.createElement("div")
+  modalFooter.className = "modal-footer"
+
+  const cancelButton = document.createElement("button")
+  cancelButton.className = "cancel-button"
+  cancelButton.textContent = "Cancelar"
+  cancelButton.onclick = () => (modal.style.display = "none")
+
+  const saveButton = document.createElement("button")
+  saveButton.className = "save-button"
+  saveButton.textContent = "Atualizar"
+  saveButton.onclick = () => updateProduct(product.id)
+
+  modalFooter.append(cancelButton, saveButton)
+  modalContent.append(modalHeader, modalBody, modalFooter)
+  modal.appendChild(modalContent)
+  document.body.appendChild(modal)
+  modal.style.display = "flex"
+}
+
+// Função para carregar categorias no dropdown de edição
+function loadCategoriesForEdit(categorySelect, selectedCategoryId) {
+  fetch(`${API_BASE_URL}/menus/${userData.partnerId}/categories`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Falha ao buscar categorias")
+      }
+      return response.json()
+    })
+    .then((categories) => {
+      // Limpar a opção de carregamento
+      categorySelect.innerHTML = ""
+
+      // Adicionar uma opção padrão
+      const defaultOption = document.createElement("option")
+      defaultOption.textContent = "Selecione uma categoria"
+      defaultOption.value = ""
+      defaultOption.disabled = true
+      
+      // Se não temos uma categoria selecionada, marcar a opção padrão como selecionada
+      if (!selectedCategoryId) {
+        defaultOption.selected = true
+      }
+      
+      categorySelect.appendChild(defaultOption)
+
+      // Adicionar a opção "Adicionar categoria"
+      const addCategoryOption = document.createElement("option")
+      addCategoryOption.textContent = "Adicionar categoria"
+      addCategoryOption.value = "add_new_category"
+      categorySelect.appendChild(addCategoryOption)
+
+      // Adicionar as categorias ao combobox
+      categories.forEach((category) => {
+        const option = document.createElement("option")
+        option.value = category.id
+        option.textContent = category.name
+        
+        // Se esta é a categoria do produto que estamos editando, marcá-la como selecionada
+        if (selectedCategoryId && category.id === selectedCategoryId) {
+          option.selected = true
+        }
+        
+        categorySelect.appendChild(option)
+      })
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar categorias:", error)
+      categorySelect.innerHTML = ""
+      const errorOption = document.createElement("option")
+      errorOption.textContent = "Erro ao carregar categorias"
+      errorOption.disabled = true
+      errorOption.selected = true
+      categorySelect.appendChild(errorOption)
+    })
+}
+
+// Função para atualizar um produto existente
+function updateProduct(productId) {
+  const name = document.getElementById("nameInput").value
+  const description = document.getElementById("descriptionInput").value
+  const price = parseFloat(document.getElementById("priceInput").value) || 0
+  const imageUrl = document.getElementById("imageUrlInput").value
+  const categoryId = document.getElementById("categoryInput").value
+
+  if (!name || price <= 0) {
+    alert("Por favor, preencha os campos obrigatórios corretamente.")
+    return
+  }
+
+  const productData = {
+    name,
+    description,
+    price,
+    imageUrl,
+    menuId: userData.partnerId,
+    categoryId: categoryId || null
+  }
+
+  fetch(`${API_BASE_URL}/products/${productId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(productData),
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Produto atualizado com sucesso!")
+        document.getElementById("modal").style.display = "none"
+        // Atualizar a lista de produtos
+        listProducts()
+        return response.json()
+      }
+      throw new Error("Falha ao atualizar produto")
+    })
+    .catch((error) => {
+      console.error("Erro ao atualizar produto:", error)
+      alert("Erro ao atualizar produto. Tente novamente.")
+    })
+}
