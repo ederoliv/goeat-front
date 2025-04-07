@@ -421,17 +421,35 @@ function editCategory(id, currentName, callback) {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Falha ao editar categoria")
+          throw new Error(
+                      Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Erro ao editar categoria",
+            showConfirmButton: false,
+            timer: 2000
+          }))
         }
         return response.json()
       })
       .then(() => {
-        alert("Categoria atualizada com sucesso!")
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Categoria atualizada com sucesso!",
+          showConfirmButton: false,
+          timer: 2000
+        });
         if (callback) callback()
       })
       .catch((error) => {
-        console.error("Erro ao editar categoria:", error)
-        alert("Erro ao editar categoria. Tente novamente.")
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Erro ao editar categoria",
+          showConfirmButton: false,
+          timer: 2000
+        });
       })
   }
 }
@@ -444,15 +462,17 @@ function deleteCategory(id, callback) {
     })
       .then((response) => {
         if (response.status === 204) {
-          alert("Categoria excluída com sucesso!")
+          goeatAlert("success", "Categoria excluída com sucesso!");
+
           if (callback) callback()
           return
         }
-        throw new Error("Falha ao excluir categoria")
+        throw new Error(
+          goeatAlert("error", "Erro ao excluir categoria")
+        )
       })
       .catch((error) => {
-        console.error("Erro ao excluir categoria:", error)
-        alert("Erro ao excluir categoria. Tente novamente.")
+        goeatAlert("error", `Erro ao excluir categoria: ${error}`)
       })
   }
 }
@@ -466,7 +486,7 @@ function addProduct() {
   const categoryId = document.getElementById("categoryInput").value
 
   if (!name || price <= 0) {
-    alert("Por favor, preencha os campos obrigatórios corretamente.")
+    goeatAlert("warning", "Por favor, preencha os campos obrigatórios corretamente.")
     return
   }
 
@@ -488,17 +508,16 @@ function addProduct() {
   })
     .then((response) => {
       if (response.status === 200 || response.status === 201) {
-        alert("Produto adicionado com sucesso!")
+        goeatAlert("success", "Produto adicionado com sucesso!")
         document.getElementById("modal").style.display = "none"
         // Atualizar a lista de produtos
         listProducts()
         return response.json()
       }
-      throw new Error("Falha ao adicionar produto")
+      throw new Error(goeatAlert("error", "Falha ao adicionar produto"))
     })
     .catch((error) => {
-      console.error("Erro ao adicionar produto:", error)
-      alert("Erro ao adicionar produto. Tente novamente.")
+      goeatAlert("error", "Erro ao adicionar produto")
     })
 }
 
@@ -511,7 +530,7 @@ function updateProduct(productId) {
   const categoryId = document.getElementById("categoryInput").value
 
   if (!name || price <= 0) {
-    alert("Por favor, preencha os campos obrigatórios corretamente.")
+    goeatAlert("warning", "Por favor, preencha os campos obrigatórios corretamente.")
     return
   }
 
@@ -533,7 +552,7 @@ function updateProduct(productId) {
   })
     .then((response) => {
       if (response.ok) {
-        alert("Produto atualizado com sucesso!")
+        goeatAlert("success", "Produto atualizado com sucesso!")
         document.getElementById("modal").style.display = "none"
         // Atualizar a lista de produtos
         listProducts()
@@ -542,8 +561,7 @@ function updateProduct(productId) {
       throw new Error("Falha ao atualizar produto")
     })
     .catch((error) => {
-      console.error("Erro ao atualizar produto:", error)
-      alert("Erro ao atualizar produto. Tente novamente.")
+      goeatAlert("error", "Falha ao atualizar produto")
     })
 }
 
@@ -650,10 +668,22 @@ async function deleteProduct(productId) {
   if (confirm("Tem certeza que deseja excluir este produto?")) {
     const response = await fetch(`${API_BASE_URL}/products/${productId}`, { method: "DELETE" })
     if (response.ok) {
-      alert("Produto excluído com sucesso!")
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Produto excluído com sucesso!",
+        showConfirmButton: false,
+        timer: 1500
+      });
       listProducts()
     } else {
-      alert("Erro ao excluir o produto.")
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Erro ao excluir produto",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   }
 }

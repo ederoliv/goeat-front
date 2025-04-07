@@ -69,3 +69,14 @@ function hideLoadingModal() {
        modal.remove();
    }
 }
+
+
+function goeatAlert(iconType,message){
+    Swal.fire({
+        position: "center",
+        icon: iconType,
+        title: message,
+        showConfirmButton: false,
+        timer: 2000
+      });
+}
