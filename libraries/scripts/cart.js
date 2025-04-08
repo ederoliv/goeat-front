@@ -9,6 +9,8 @@ function addCartItem(productName, productPrice, productQuantity) {
     updateCart(productName, productPrice, productQuantity);
     updateCartNavbar();
 
+    // Salva o carrinho na sessionStorage
+    saveCartToStorage();
 }
 
 function removeCartItem(){
@@ -33,6 +35,9 @@ function updateCart(productName, productPrice, productQuantity){
     } else {
         cart.push({ name: productName, price: productPrice, quantity: productQuantity});
     }
+
+    // Salva o carrinho atualizado
+    saveCartToStorage();
 }
 
 function calculateCartTotalPrice(clientCart) {
@@ -64,7 +69,7 @@ function updateCartNavbar() {
     
     let totalPrice = calculateCartTotalPrice(cart);
     let totalItems = calculateCartTotalItems(cart);
-    cartInfo.textContent = `Carrinho: ${totalItems} itens | Total: R$ ${totalPrice}`;
+    cartInfo.textContent = `Carrinho: ${totalItems} itens | Total: R$ ${formatPrice(totalPrice)}`;
 }
 
 
@@ -205,6 +210,8 @@ function loadCart() {
         const last = calculateCartTotalPrice(cart);
         totalPedido.innerText = `Total do pedido: R$ ${last}`;
 
+        // Salva o carrinho atualizado
+        saveCartToStorage();
     });
     
             
@@ -229,6 +236,9 @@ function loadCart() {
         
         const last = calculateCartTotalPrice(cart);
         totalPedido.innerText = `Total do pedido: R$ ${last}`;
+
+        // Salva o carrinho atualizado
+        saveCartToStorage();
     });
     
     
@@ -245,6 +255,8 @@ function loadCart() {
             totalPedido.innerText = `Total do pedido: R$ ${last}`;
         }
 
+        // Salva o carrinho atualizado
+        saveCartToStorage();
     });
     
   
@@ -265,4 +277,39 @@ function loadCart() {
     closeButton.addEventListener('click', () => {
         overlay.style.display = 'none';
       });
+
+    // Adiciona evento para o botão "Fazer Pedido"
+    saveButton.addEventListener('click', () => {
+        // Pega o partnerId da URL
+        const params = new URLSearchParams(window.location.search);
+        const partnerId = params.get('partnerId');
+        
+        // Salva o carrinho antes de redirecionar
+        saveCartToStorage();
+        
+        // Redireciona para a página de checkout
+        window.location.href = `checkout.html?partnerId=${partnerId}`;
+    });
 }
+
+// Função para salvar o carrinho na sessionStorage
+function saveCartToStorage() {
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// Função para carregar o carrinho da sessionStorage
+function loadCartFromStorage() {
+    const savedCart = sessionStorage.getItem('cart');
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+        
+        // Se o carrinho não estiver vazio, crie a navbar
+        if (cart.length > 0) {
+            createCartNavbar();
+            updateCartNavbar();
+        }
+    }
+}
+
+// Carrega o carrinho ao iniciar a página
+window.addEventListener('DOMContentLoaded', loadCartFromStorage);
