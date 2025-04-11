@@ -76,7 +76,7 @@ function createPartnerCard(partner, container) {
     
     // Estrutura HTML do card
     card.innerHTML = `
-        <img class="partner-card-image" src="${partner.coverImage || `${root}${routes.assets}restaurant-cover.jpg`}" alt="${partner.name}">
+        <img class="partner-card-image" src="${partner.coverImage || `${root}${routes.assets}foods.png`}" alt="${partner.name}">
         <img class="partner-logo" src="${partner.logo || `${root}${routes.assets}partner.png`}" alt="${partner.name} logo">
         <div class="partner-card-content">
             <div class="partner-card-header">
